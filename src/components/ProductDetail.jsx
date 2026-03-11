@@ -85,12 +85,7 @@ export default function ProductDetail() {
               transition: { duration: 0.3, ease: "easeOut" }
             }}
             transition={{ duration: 0.45 }}
-            className="w-full h-[420px] sm:h-[520px] md:h-[640px] object-cover bg-slate-100 cursor-zoom-in rounded-lg touch-manipulation"
-            style={{
-              width: '70%',
-              height: 'auto',
-              margin: '0 auto'
-            }}
+            className="w-full h-[420px] sm:h-[520px] md:h-[640px] object-contain bg-slate-100 cursor-zoom-in rounded-lg touch-manipulation"
             onClick={() => setOpen(true)}
           />
 
@@ -110,7 +105,7 @@ export default function ProductDetail() {
               <button
                 key={`${t.src}-${i}`}
                 onClick={() => setActive(i)}
-                className={`flex-shrink-0 w-16 h-12 sm:w-20 sm:h-14 md:w-28 md:h-20 rounded-md transition-all cursor-pointer overflow-hidden border-2 ${i === active ? 'border-[#c9a96e]' : 'border-slate-200'} bg-white hover:border-[#c9a96e]`}
+                className={`flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-md transition-all cursor-pointer overflow-hidden border-2 ${i === active ? 'border-[#c9a96e]' : 'border-slate-200'} bg-white hover:border-[#c9a96e]`}
                 aria-label={`Thumbnail ${i + 1}`}
               >
                 <img 
