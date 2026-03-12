@@ -11,7 +11,7 @@ export default function ArtistCardMini({ name = 'Pradip Sarkar', image = '', loc
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
       whileHover={{ y: -8, scale: 1.02 }}
-      className="relative group bg-gradient-to-br from-white via-slate-50 to-white p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl border-2 border-slate-200 shadow-xl hover:shadow-2xl hover:border-amber-200 transition-all duration-500 overflow-hidden cursor-pointer"
+      className="relative group bg-gradient-to-br from-white via-slate-50 to-white p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl border-2 border-slate-200 shadow-xl hover:shadow-2xl hover:border-amber-200 transition-all duration-500 overflow-hidden cursor-pointer w-full max-w-3xl"
     >
       {/* Animated gradient overlays - More visible */}
       <div className="absolute top-0 right-0 w-32 h-32 sm:w-48 sm:h-48 bg-gradient-to-br from-amber-200 via-yellow-100 to-transparent opacity-50 rounded-full blur-3xl group-hover:opacity-90 group-hover:scale-125 transition-all duration-700"></div>

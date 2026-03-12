@@ -25,7 +25,7 @@ const THUMBS = [
 
 export default function ProductDetail() {
   const [active, setActive] = useState(0)
-  const [tab, setTab] = useState('about')
+  const [tab, setTab] = useState('artist')
   const [open, setOpen] = useState(false)
   const [added, setAdded] = useState(false)
   const [showMagnifier, setShowMagnifier] = useState(false)
@@ -58,28 +58,6 @@ export default function ProductDetail() {
 
   return (
     <div className="relative">
-      {/* Left Side Text - DIVINE */}
-      <div className="hidden lg:flex fixed left-4 top-1/2 -translate-y-1/2 z-10 h-screen items-center justify-center">
-        <div className="flex flex-col items-center justify-center">
-          {['D', 'I', 'V', 'I', 'N', 'E'].map((letter, idx) => (
-            <span key={idx} className="text-9xl font-extrabold leading-none" style={{ fontFamily: 'serif', color: '#b8935f' }}>
-              {letter}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* Right Side Text - TUNES */}
-      <div className="hidden lg:flex fixed right-4 top-1/2 -translate-y-1/2 z-10 h-screen items-center justify-center">
-        <div className="flex flex-col items-center justify-center">
-          {['T', 'U', 'N', 'E', 'S'].map((letter, idx) => (
-            <span key={idx} className="text-9xl font-extrabold leading-none" style={{ fontFamily: 'serif', color: '#b8935f' }}>
-              {letter}
-            </span>
-          ))}
-        </div>
-      </div>
-
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-start px-4 md:px-6 lg:px-0">
       {/* Left - Artwork */}
       <div className="space-y-6">
@@ -202,37 +180,104 @@ export default function ProductDetail() {
           )}
         </AnimatePresence>
 
-        {/* Artist Section */}
+        {/* About the Artwork Section */}
         <motion.div 
-          className="mt-16"
-          initial={{ opacity: 0, y: 60 }}
+          className="mt-8"
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
         >
           <motion.h3 
-            className="text-4xl md:text-5xl font-serif font-extrabold text-slate-900 mb-8 flex items-center gap-4 group"
+            className="text-3xl md:text-4xl font-serif font-extrabold text-slate-900 mb-6 flex items-center gap-4"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <motion.span 
-              className="h-1 bg-gradient-to-r from-slate-900 via-emerald-600 to-teal-600 group-hover:from-emerald-600 group-hover:to-teal-600 transition-all duration-500 rounded-full shadow-lg"
+              className="h-1 bg-gradient-to-r from-[#c9a96e] via-[#b8935f] to-[#c9a96e] transition-all duration-500 rounded-full shadow-lg"
               initial={{ width: 0 }}
               whileInView={{ width: 60 }}
               viewport={{ once: true }}
               transition={{ duration: 1, delay: 0.4 }}
-              whileHover={{ width: 80, height: 6 }}
             ></motion.span>
-            <motion.span 
-              className="group-hover:text-emerald-600 transition-colors duration-300"
-              whileHover={{ scale: 1.05, x: 10 }}
-            >
-              The Artist
-            </motion.span>
+            <span>About the Artwork</span>
           </motion.h3>
-          <ArtistCardMini name="Pradip Sarkar" image="https://res.cloudinary.com/dp2e8mfvm/image/upload/v1753511549/kwcnlfdzx5kebvxrr1gz.jpg" location="Mumbai, India" />
+          
+          <div className="space-y-4 text-sm text-slate-700">
+            <div className="font-semibold text-base">Divine Tunes-11 Painting series</div>
+            <div>WxH: 32.00 x 30.00 inch (81.28 x 76.20 cm)</div>
+            <div>Type of Artwork: Painting</div>
+            <div>Shipped as: Rolled</div>
+
+            <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-700">
+              <div><span className="font-semibold">Category:</span> Portrait</div>
+              <div><span className="font-semibold">Style:</span> Geometric</div>
+              <div><span className="font-semibold">Techniques:</span> Acrylic</div>
+              <div><span className="font-semibold">Material used:</span> Canvas</div>
+              <div><span className="font-semibold">Size (WxH):</span> 45.72 x 50.80 cm</div>
+              <div><span className="font-semibold">Medium:</span> Acrylic</div>
+              <div><span className="font-semibold">Selling Options:</span> Original</div>
+              <div><span className="font-semibold">Year:</span> 2018</div>
+              <div className="col-span-full"><span className="font-semibold">Delivery:</span> Stretched</div>
+            </div>
+
+            <div className="mt-4">This piece is part of the 'DIVINE TUNES' series — a saga of urge whereby depicted deeds inspire others. Love, affection, innocence, bonding and festivity are the root of the sonata that created this ambiance of expression and effect. Art in itself is the final message.</div>
+
+            <ArtworkStatement title="Lady and Butterflies" defaultOpen={true}>
+              <div className="space-y-3">
+                <p>To further enhance the connection with nature, I have included three butterflies in the painting. Resplendent in darker shades of purple and pink, they flutter gracefully around the woman's face. These ethereal creatures symbolize the delicate balance of life and the interconnectedness between all living beings.</p>
+
+                <p>"Lady and Butterflies" belongs to the series "In Harmony with Nature." This collection explores the profound connection and interdependence between humans and the natural world. Through my art, I strive to inspire viewers to embrace compassion, appreciate the beauty of nature, and live in harmony with our surroundings.</p>
+
+                <h5 className="font-extrabold text-xl">Capturing the Awe-Inspiring Connection</h5>
+                <p>With "Lady and Butterflies", I aimed to capture the profound and awe-inspiring connection between humans and nature. The woman's gentle smile and loving gaze reflect her appreciation for the beauty that surrounds her. It is a reminder that we, too, can experience this sense of wonder and unity by embracing our role as caretakers of the earth.</p>
+
+                <h5 className="font-extrabold text-xl">Living in Harmony with Nature</h5>
+                <p>Through this artwork, I hope to convey the importance of living in harmony with nature. Our actions, both individually and collectively, reverberate through the delicate balance of ecosystems. By fostering empathy for all creatures, we can mitigate the negative impacts of human activities and strive towards a more sustainable coexistence.</p>
+
+                <p>In this series, I use symmetrical forms—squares, rectangles, checks, and butterflies—to cover the human figures. These geometric shapes represent the pursuit of perfection and balance, encapsulating the aspirations and struggles we all face as individuals striving for fulfillment.</p>
+              </div>
+            </ArtworkStatement>
+          </div>
+        </motion.div>
+
+        {/* Artist Section */}
+        <motion.div 
+          className="mt-16 flex flex-col items-center justify-center w-full"
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <div className="w-full max-w-4xl mx-auto px-4 md:px-8">
+            <motion.h3 
+              className="text-4xl md:text-5xl font-serif font-extrabold text-slate-900 mb-8 flex items-center justify-center gap-4 group"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <motion.span 
+                className="h-1 bg-gradient-to-r from-slate-900 via-emerald-600 to-teal-600 group-hover:from-emerald-600 group-hover:to-teal-600 transition-all duration-500 rounded-full shadow-lg"
+                initial={{ width: 0 }}
+                whileInView={{ width: 60 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, delay: 0.4 }}
+                whileHover={{ width: 80, height: 6 }}
+              ></motion.span>
+              <motion.span 
+                className="group-hover:text-emerald-600 transition-colors duration-300"
+                whileHover={{ scale: 1.05, x: 10 }}
+              >
+                The Artist
+              </motion.span>
+            </motion.h3>
+            <div className="flex justify-center">
+              <ArtistCardMini name="Pradip Sarkar" image="https://res.cloudinary.com/dp2e8mfvm/image/upload/v1753511549/kwcnlfdzx5kebvxrr1gz.jpg" location="Mumbai, India" />
+            </div>
+          </div>
         </motion.div>
       </div>
 
@@ -274,23 +319,6 @@ export default function ProductDetail() {
           <div className="mt-6">
             <div className="flex items-center gap-2 sm:gap-3 bg-slate-50/50 p-1.5 rounded-xl border border-slate-200 overflow-x-auto">
               <button 
-                onClick={() => setTab('about')} 
-                className={`
-                  relative px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-medium whitespace-nowrap rounded-lg
-                  transition-all duration-300 ease-in-out
-                  ${tab === 'about' 
-                    ? 'bg-white text-[#c9a96e] shadow-md shadow-[#c9a96e]/10 border border-[#c9a96e]/20' 
-                    : 'text-slate-600 hover:text-[#c9a96e] hover:bg-white/50'
-                  }
-                `}
-              >
-                <span className="relative z-10">About the Artwork</span>
-                {tab === 'about' && (
-                  <span className="absolute inset-0 bg-gradient-to-r from-[#c9a96e]/5 via-[#d4af7a]/5 to-[#c9a96e]/5 rounded-lg animate-pulse"></span>
-                )}
-              </button>
-              
-              <button 
                 onClick={() => setTab('artist')} 
                 className={`
                   relative px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-medium whitespace-nowrap rounded-lg
@@ -326,52 +354,49 @@ export default function ProductDetail() {
             </div>
 
             <div className="mt-4 text-sm text-slate-700">
-                {tab === 'about' && (
-                <div className="space-y-2">
-                  <div className="font-semibold">Divine Tunes-11 Painting series</div>
-                  <div>WxH: 32.00 x 30.00 inch (81.28 x 76.20 cm)</div>
-                  <div>Type of Artwork: Painting</div>
-                  <div>Shipped as: Rolled</div>
-
-                  <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-700">
-                    <div><span className="font-semibold">Category:</span> Portrait</div>
-                    <div><span className="font-semibold">Style:</span> Geometric</div>
-                    <div><span className="font-semibold">Techniques:</span> Acrylic</div>
-                    <div><span className="font-semibold">Material used:</span> Canvas</div>
-                    <div><span className="font-semibold">Size (WxH):</span> 45.72 x 50.80 cm</div>
-                    <div><span className="font-semibold">Medium:</span> Acrylic</div>
-                    <div><span className="font-semibold">Selling Options:</span> Original</div>
-                    <div><span className="font-semibold">Year:</span> 2018</div>
-                    <div className="col-span-full"><span className="font-semibold">Delivery:</span> Stretched</div>
-                  </div>
-
-                  <div className="mt-2">This piece is part of the 'DIVINE TUNES' series — a saga of urge whereby depicted deeds inspire others. Love, affection, innocence, bonding and festivity are the root of the sonata that created this ambiance of expression and effect. Art in itself is the final message.</div>
-
-                  <ArtworkStatement title="Lady and Butterflies" defaultOpen={true}>
-                    <div className="space-y-3">
-                      <p>To further enhance the connection with nature, I have included three butterflies in the painting. Resplendent in darker shades of purple and pink, they flutter gracefully around the woman’s face. These ethereal creatures symbolize the delicate balance of life and the interconnectedness between all living beings.</p>
-
-                      <p>“Lady and Butterflies” belongs to the series “In Harmony with Nature.” This collection explores the profound connection and interdependence between humans and the natural world. Through my art, I strive to inspire viewers to embrace compassion, appreciate the beauty of nature, and live in harmony with our surroundings.</p>
-
-                      <h5 className="font-extrabold text-xl">Capturing the Awe-Inspiring Connection</h5>
-                      <p>With “Lady and Butterflies”, I aimed to capture the profound and awe-inspiring connection between humans and nature. The woman’s gentle smile and loving gaze reflect her appreciation for the beauty that surrounds her. It is a reminder that we, too, can experience this sense of wonder and unity by embracing our role as caretakers of the earth.</p>
-
-                      <h5 className="font-extrabold text-xl">Living in Harmony with Nature</h5>
-                      <p>Through this artwork, I hope to convey the importance of living in harmony with nature. Our actions, both individually and collectively, reverberate through the delicate balance of ecosystems. By fostering empathy for all creatures, we can mitigate the negative impacts of human activities and strive towards a more sustainable coexistence.</p>
-
-                      <p>In this series, I use symmetrical forms—squares, rectangles, checks, and butterflies—to cover the human figures. These geometric shapes represent the pursuit of perfection and balance, encapsulating the aspirations and struggles we all face as individuals striving for fulfillment.</p>
-                    </div>
-                  </ArtworkStatement>
-                </div>
-              )}
-
                 {tab === 'artist' && (
-                  <div className="space-y-2 text-justify">
-                    <p className="mb-2"><strong>About The Artist</strong></p>
-                    <p className="mb-2">PRADIP was born in Dhanbad, Jharkhand. He is a commerce graduate from Ranchi University and holds a diploma in fine art from the British Institute, Mumbai. Pradip is a gifted artist and a well-known face in the Indian contemporary art world since 1995, with over 70 significant exhibitions.</p>
-                    <p className="mb-2">PRADIP SARKAR is an eminent artist of international repute whose geometric abstraction masterpieces adorn many corporate collections in India and abroad and are present in prestigious galleries like Lalit Kala Akademi.</p>
-                    <p className="mb-2">Pradip's palette is warm, inviting and vibrant. His brush strokes speak of serenity, soothing hues and characteristic vibrancy that symbolize a frenetic pace and multitude of life's elements. His work focuses on spiritual and cultural aspects of society and reflects his philosophy of life, leaning towards music and harmony. He often composes with geometric boxed forms in layered applications, where his observation becomes the subject of his canvases.</p>
-                    <p className="mb-2">Pradip says, "Art is the expression of his own life story... art is divine" — his love for music and harmony shows itself through his works. His paintings are found in collections across Germany, USA, Dubai and India, and in numerous corporate and institutional collections including Lalit Kala Akademi.</p>
+                  <div className="space-y-4 text-justify">
+                    <p className="mb-3"><strong>About The Artist</strong></p>
+                    <p className="mb-3">PRADIP SARKAR was born in Dhanbad, Jharkhand. He is a commerce graduate from Ranchi University and holds a diploma in fine art from the British Institute, Mumbai. Pradip is a gifted artist and a well-known face in the Indian contemporary art world since 1995, with over 70 significant exhibitions.</p>
+                    
+                    {/* Artist Images 1 & 2 */}
+                    <div className="grid grid-cols-2 gap-3 my-4">
+                      <div className="rounded-lg overflow-hidden shadow-md">
+                        <img src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=400" alt="Artist at work" className="w-full h-32 object-cover" />
+                      </div>
+                      <div className="rounded-lg overflow-hidden shadow-md">
+                        <img src="https://images.unsplash.com/photo-1578301978162-7aae4d755744?w=400" alt="Geometric artwork" className="w-full h-32 object-cover" />
+                      </div>
+                    </div>
+
+                    <p className="mb-3">PRADIP SARKAR is an eminent artist of international repute whose geometric abstraction masterpieces adorn many corporate collections in India and abroad. His works are present in prestigious galleries like Lalit Kala Akademi.</p>
+                    <p className="mb-3">Pradip's palette is warm, inviting and vibrant. His brush strokes speak of serenity, soothing hues and characteristic vibrancy. His work focuses on spiritual and cultural aspects of society and reflects his philosophy of life, leaning towards music and harmony.</p>
+                    
+                    {/* Artist Images 3 & 4 */}
+                    <div className="grid grid-cols-2 gap-3 my-4">
+                      <div className="rounded-lg overflow-hidden shadow-md">
+                        <img src="https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?w=400" alt="Artist studio" className="w-full h-32 object-cover" />
+                      </div>
+                      <div className="rounded-lg overflow-hidden shadow-md">
+                        <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=400" alt="Abstract painting" className="w-full h-32 object-cover" />
+                      </div>
+                    </div>
+
+                    <p className="mb-3 mt-4"><strong>Artistic Vision</strong></p>
+                    <p className="mb-3">His 'Divine Tunes' series represents the pinnacle of his artistic vision, where music, spirituality, and visual art converge. Pradip draws inspiration from classical Indian music, folk traditions, and the vibrant cultural tapestry of India.</p>
+                    <p className="mb-3">Working primarily with acrylics on canvas, Pradip employs a sophisticated layering technique that gives his paintings remarkable depth and luminosity. Each artwork is meticulously crafted, with layers of acrylic carefully applied to create depth and texture.</p>
+                    
+                    {/* Artist Images 5 & 6 */}
+                    <div className="grid grid-cols-2 gap-3 my-4">
+                      <div className="rounded-lg overflow-hidden shadow-md">
+                        <img src="https://images.unsplash.com/photo-1582561833896-f83669c1ebfe?w=400" alt="Gallery exhibition" className="w-full h-32 object-cover" />
+                      </div>
+                      <div className="rounded-lg overflow-hidden shadow-md">
+                        <img src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=400" alt="Art collection" className="w-full h-32 object-cover" />
+                      </div>
+                    </div>
+
+                    <p className="mb-3">Pradip says, "Art is the expression of his own life story... art is divine" — his love for music and harmony shows itself through his works. His paintings are found in collections across Germany, USA, Dubai and India, and in numerous corporate and institutional collections including Lalit Kala Akademi.</p>
                   </div>
                 )}
 

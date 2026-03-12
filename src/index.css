@@ -440,3 +440,29 @@ h1, h2, h3, h4, h5, h6, .font-serif {
 /* Radar chart draw animation helper */
 .radar { stroke: var(--leaf-green); stroke-width: 2; fill: rgba(6,95,70,0.06); stroke-dasharray: 500; stroke-dashoffset: 500; transition: stroke-dashoffset 900ms ease; }
 .radar.visible { stroke-dashoffset: 0; }
+
+/* Custom Scrollbar for Modal */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #c9a96e, #d4af7a);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #a87d4d, #c9a96e);
+}
+
+/* Firefox */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #c9a96e #f1f5f9;
+}
