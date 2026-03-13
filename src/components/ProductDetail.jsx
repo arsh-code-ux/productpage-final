@@ -382,10 +382,10 @@ export default function ProductDetail() {
                 {/* Artist Images 1 & 2 */}
                 <div className="grid grid-cols-2 gap-3 my-4">
                   <div className="rounded-lg overflow-hidden shadow-md">
-                    <img src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=800&q=80" alt="Artist at work" className="w-full h-32 object-cover" loading="lazy" />
+                    <img src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=800&q=80" alt="Artist at work" className="w-full h-48 sm:h-56 md:h-64 object-cover" loading="lazy" />
                   </div>
                   <div className="rounded-lg overflow-hidden shadow-md">
-                    <img src="https://images.unsplash.com/photo-1578301978162-7aae4d755744?w=800&q=80" alt="Geometric artwork" className="w-full h-32 object-cover" loading="lazy" />
+                    <img src="https://images.unsplash.com/photo-1578301978162-7aae4d755744?w=800&q=80" alt="Geometric artwork" className="w-full h-48 sm:h-56 md:h-64 object-cover" loading="lazy" />
                   </div>
                 </div>
 
@@ -395,10 +395,10 @@ export default function ProductDetail() {
                 {/* Artist Images 3 & 4 */}
                 <div className="grid grid-cols-2 gap-3 my-4">
                   <div className="rounded-lg overflow-hidden shadow-md">
-                    <img src="https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?w=400" alt="Artist studio" className="w-full h-32 object-cover" />
+                    <img src="https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?w=400" alt="Artist studio" className="w-full h-48 sm:h-56 md:h-64 object-cover" />
                   </div>
                   <div className="rounded-lg overflow-hidden shadow-md">
-                    <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=400" alt="Abstract painting" className="w-full h-32 object-cover" />
+                    <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=400" alt="Abstract painting" className="w-full h-48 sm:h-56 md:h-64 object-cover" />
                   </div>
                 </div>
 
@@ -409,10 +409,10 @@ export default function ProductDetail() {
                 {/* Artist Images 5 & 6 */}
                 <div className="grid grid-cols-2 gap-3 my-4">
                   <div className="rounded-lg overflow-hidden shadow-md bg-slate-50">
-                    <img src={akhImage} alt="Gallery exhibition" className="w-full h-48 object-contain" />
+                    <img src={akhImage} alt="Gallery exhibition" className="w-full h-56 sm:h-64 md:h-72 object-contain" />
                   </div>
                   <div className="rounded-lg overflow-hidden shadow-md">
-                    <img src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=400" alt="Art collection" className="w-full h-48 object-cover" />
+                    <img src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=400" alt="Art collection" className="w-full h-56 sm:h-64 md:h-72 object-cover" />
                   </div>
                 </div>
 
