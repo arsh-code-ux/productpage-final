@@ -114,9 +114,9 @@ export default function ArtworkSlider() {
   }
 
   return (
-    <div className="relative w-full h-full bg-gradient-to-br from-slate-50 via-white to-slate-50 rounded-xl shadow-lg border border-slate-200 overflow-hidden flex flex-col">
+    <div className="relative w-full h-full min-h-[300px] sm:min-h-[350px] md:min-h-0 bg-gradient-to-br from-slate-50 via-white to-slate-50 rounded-xl shadow-lg border border-slate-200 overflow-hidden flex flex-col">
       {/* Slider Container - Takes full height */}
-      <div className="relative flex-1 bg-gradient-to-br from-slate-100 to-slate-50 overflow-hidden">
+      <div className="relative flex-1 min-h-[250px] sm:min-h-[300px] md:min-h-0 bg-gradient-to-br from-slate-100 to-slate-50 overflow-hidden">
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={currentIndex}

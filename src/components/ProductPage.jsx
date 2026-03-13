@@ -1,6 +1,5 @@
 import React from 'react'
 import ProductDetail from './ProductDetail'
-import ArtistSaga from './ArtistSaga'
 import TrustBar from './TrustBar'
 
 export default function ProductPage() {
@@ -10,9 +9,6 @@ export default function ProductPage() {
         <ProductDetail />
         <div className="mt-12 sm:mt-16">
           <TrustBar />
-        </div>
-        <div className="mt-20 sm:mt-28">
-          <ArtistSaga />
         </div>
       </div>
     </div>

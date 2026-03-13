@@ -13,7 +13,7 @@ export default function ProductCard({ title, artist, image, price, href = '#', v
   }, [open])
 
   // variant: 'tall' or 'short' -> controls image frame height for masonry-like look
-  const sizeClasses = 'h-48 sm:h-56 md:h-72'
+  const sizeClasses = 'h-56 sm:h-64 md:h-80'
 
   const [selectedVariant, setSelectedVariant] = useState('simple')
 

@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ZoomIn, Maximize2, ShoppingCart, CreditCard, Truck, CheckCircle, X, Share2, MessageCircle, Package, Clock, MapPin, Shield, RefreshCw, Globe } from 'lucide-react'
-import ColorExtractor from './ColorExtractor'
-import ARPreview from './ARPreview'
-import RelatedWorks from './RelatedWorks'
-import ArtistBioDetailed from './ArtistBioDetailed'
 import ArtworkStatement from './ArtworkStatement'
 import ReadMore from './ReadMore'
 import ArtistCardMini from './ArtistCardMini'
 import ArtworkSlider from './ArtworkSlider'
+import ArtistSaga from './ArtistSaga'
 import wallImage1 from '../image 1.png'
 import wallImage2 from '../image2.png'
 import wallImage3 from '../image3.png'
@@ -69,9 +66,11 @@ export default function ProductDetail() {
 
   return (
     <div className="relative">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 px-4 md:px-6 lg:px-0">
-      {/* Left - Artwork - Takes left 50% on desktop */}
-      <div className="space-y-6 md:pr-4">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 lg:gap-12 px-4 md:px-6 lg:px-0">
+      {/* Left - Artwork - Takes 70% on desktop */}
+      <div className="md:col-span-8 md:pr-4">
+        {/* Image Gallery Section */}
+        <div className="space-y-6">
         <div 
           className="relative rounded-lg overflow-visible"
           style={{
@@ -127,6 +126,64 @@ export default function ProductDetail() {
               </button>
             );
           })}
+        </div>
+        </div>
+
+        {/* Divine Tunes Box - Mobile Only (shows after images, before tabs) */}
+        <div className="md:hidden mt-6">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="w-full flex flex-col bg-white rounded-xl border-2 border-slate-300 text-slate-900 shadow-xl overflow-hidden"
+          >
+            {/* Top Section - Price & Buttons */}
+            <div className="flex-shrink-0 p-4 sm:p-6 border-b border-slate-200">
+              <h1 className="font-serif text-3xl sm:text-4xl font-bold">Divine Tunes-11</h1>
+              <a href="#" className="text-sm text-slate-600 block mt-2 hover:underline">Pradip Sarkar</a>
+
+              <div className="mt-6">
+                <div className="text-sm text-slate-500">Price</div>
+                <div className="text-xl sm:text-2xl font-semibold mt-1">₹1,18,300 <span className="text-xs sm:text-sm text-slate-500 font-normal">($1,577.33)</span></div>
+                <div className="text-xs text-slate-500 mt-1">Tax included</div>
+              </div>
+
+              <div className="mt-4 space-y-2 text-xs sm:text-sm">
+                <div className="flex items-center space-x-2 text-slate-700"><RefreshCw size={14} className="sm:w-4 sm:h-4 flex-shrink-0" /> <span>14-Days Money Back Guarantee</span></div>
+                <div className="flex items-center space-x-2 text-slate-700"><Shield size={14} className="sm:w-4 sm:h-4 flex-shrink-0" /> <span>100% Secured Payment</span></div>
+                <div className="flex items-center space-x-2 text-slate-700"><CheckCircle size={14} className="sm:w-4 sm:h-4 flex-shrink-0" /> <span>Certificate of Authenticity</span></div>
+                <div className="flex items-center space-x-2 text-slate-700"><Truck size={14} className="sm:w-4 sm:h-4 flex-shrink-0" /> <span>Free shipping world wide</span></div>
+              </div>
+
+              <div className="mt-6 flex flex-col gap-2">
+                <button className="w-full flex items-center justify-center gap-1.5 px-3 py-3 bg-[#c9a96e] hover:bg-[#a87d4d] text-white rounded-lg font-semibold transition-all text-xs sm:text-sm">
+                  <ShoppingCart size={15} /> <span>Add to Cart</span>
+                </button>
+                <button 
+                  onClick={() => setShowOfferModal(true)}
+                  className="w-full flex items-center justify-center gap-1.5 px-3 py-3 border-2 border-[#c9a96e] rounded-lg text-[#c9a96e] hover:bg-[#c9a96e] hover:text-white font-semibold bg-white transition-all text-xs sm:text-sm"
+                >
+                  <MessageCircle size={15} /> <span>Make an Offer</span>
+                </button>
+                <button className="w-full flex items-center justify-center gap-1.5 px-3 py-3 bg-[#c9a96e] hover:bg-[#a87d4d] text-white rounded-lg font-semibold transition-all text-xs sm:text-sm">
+                  <CreditCard size={15} /> <span>Buy Now</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Bottom Section - Featured Artworks Slider */}
+            <div className="overflow-hidden p-4 sm:p-6 min-h-[350px] sm:min-h-[400px]">
+              <div className="h-full flex flex-col">
+                <h3 className="text-lg font-bold text-slate-900 mb-3 flex items-center gap-2">
+                  <span className="w-1 h-5 bg-gradient-to-b from-[#c9a96e] to-[#b8935f] rounded-full"></span>
+                  Featured Artworks
+                </h3>
+                <div className="flex-1 min-h-[280px] sm:min-h-[320px]">
+                  <ArtworkSlider />
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
 
         <AnimatePresence>
@@ -594,9 +651,9 @@ export default function ProductDetail() {
           </div>
         </motion.div>
 
-        {/* Artist Section - Full Width Centered */}
+        {/* Artist Section - Full Width in Left Column */}
         <motion.div 
-          className="mt-16 col-span-1 md:col-span-2 flex flex-col items-center justify-center w-full"
+          className="mt-16 md:col-span-7 flex flex-col items-center justify-center w-full"
           initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -630,10 +687,21 @@ export default function ProductDetail() {
             </div>
           </div>
         </motion.div>
+
+        {/* Artist Saga Section - Left Column Only */}
+        <motion.div 
+          className="mt-16 md:col-span-8"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <ArtistSaga />
+        </motion.div>
       </div>
 
-      {/* Right - Completely Fixed Sidebar */}
-      <div className="md:fixed md:top-4 md:right-4 md:w-[calc(50%-2rem)] md:h-[calc(100vh-2rem)] md:overflow-hidden">
+      {/* Right - Completely Fixed Sidebar - Takes 30% - Desktop Only */}
+      <div className="hidden md:block md:col-span-4 md:fixed md:top-4 md:right-4 md:w-[calc(33%-2rem)] md:h-[calc(100vh-2rem)] md:overflow-hidden">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -675,13 +743,13 @@ export default function ProductDetail() {
           </div>
 
           {/* Bottom Section - Featured Artworks Slider */}
-          <div className="flex-1 overflow-hidden p-4 sm:p-6">
+          <div className="flex-1 overflow-hidden p-4 sm:p-6 min-h-[350px] sm:min-h-[400px] md:min-h-0">
             <div className="h-full flex flex-col">
               <h3 className="text-lg font-bold text-slate-900 mb-3 flex items-center gap-2">
                 <span className="w-1 h-5 bg-gradient-to-b from-[#c9a96e] to-[#b8935f] rounded-full"></span>
                 Featured Artworks
               </h3>
-              <div className="flex-1 min-h-0">
+              <div className="flex-1 min-h-[280px] sm:min-h-[320px] md:min-h-0">
                 <ArtworkSlider />
               </div>
             </div>
