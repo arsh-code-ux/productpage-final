@@ -299,9 +299,10 @@ export default function ProductDetail() {
           </div>
 
           <div className="mt-4 space-y-2 text-xs sm:text-sm">
-            <div className="flex items-center space-x-2 text-slate-700"><CheckCircle size={14} className="sm:w-4 sm:h-4 flex-shrink-0" /> <span>Certificate of Authenticity Included</span></div>
-            <div className="flex items-center space-x-2 text-slate-700"><Truck size={14} className="sm:w-4 sm:h-4 flex-shrink-0" /> <span>Free Worldwide Shipping</span></div>
-            <div className="flex items-center space-x-2 text-slate-700"><Share2 size={14} className="sm:w-4 sm:h-4 flex-shrink-0" /> <span>Share Artwork</span></div>
+            <div className="flex items-center space-x-2 text-slate-700"><RefreshCw size={14} className="sm:w-4 sm:h-4 flex-shrink-0" /> <span>14-Days Money Back Guarantee</span></div>
+            <div className="flex items-center space-x-2 text-slate-700"><Shield size={14} className="sm:w-4 sm:h-4 flex-shrink-0" /> <span>100% Secured Payment</span></div>
+            <div className="flex items-center space-x-2 text-slate-700"><CheckCircle size={14} className="sm:w-4 sm:h-4 flex-shrink-0" /> <span>Certificate of Authenticity</span></div>
+            <div className="flex items-center space-x-2 text-slate-700"><Truck size={14} className="sm:w-4 sm:h-4 flex-shrink-0" /> <span>Free shipping world wide</span></div>
           </div>
 
           <div className="mt-6 flex flex-col sm:flex-row gap-2">

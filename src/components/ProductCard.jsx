@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CTAButtons from './CTAButtons'
 
-export default function ProductCard({ title, artist, image, price, href = '#', verified = false, variant = 'tall' }) {
+export default function ProductCard({ title, artist, image, price, href = '#', verified = false, variant = 'tall', hidden = false }) {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
@@ -43,8 +43,19 @@ export default function ProductCard({ title, artist, image, price, href = '#', v
     <>
       <motion.article
         className="relative glass-card rounded-lg overflow-hidden shadow-sm border border-white/8 product-card"
-        whileHover={{ y: -6 }}
-        transition={{ type: 'spring', stiffness: 250, damping: 22 }}
+        whileHover={!hidden ? { y: -6 } : {}}
+        animate={{ 
+          opacity: hidden ? 0 : 1,
+          y: hidden ? 20 : 0
+        }}
+        transition={{ 
+          opacity: { duration: 0.4 },
+          y: { type: 'spring', stiffness: 250, damping: 22 }
+        }}
+        style={{ 
+          pointerEvents: hidden ? 'none' : 'auto',
+          display: hidden ? 'none' : 'block'
+        }}
       >
   <button onClick={() => setOpen(true)} className={`block w-full ${sizeClasses} overflow-hidden relative p-2 sm:p-4 md:p-6 bg-transparent`}> 
           <div className="product-image-frame w-full h-full rounded-md relative flex items-center justify-center">
@@ -109,11 +120,11 @@ export default function ProductCard({ title, artist, image, price, href = '#', v
                     <CTAButtons />
                   </div>
 
-                  <div className="mt-6 benefits text-sm muted-text">
-                    <div>• 14-Days Money Back Guarantee</div>
-                    <div>• 100% Secured Payment</div>
-                    <div>• Certificate of Authenticity</div>
-                    <div>• Free shipping world wide</div>
+                  <div className="mt-6 benefits text-sm muted-text space-y-2">
+                    <div>14-Days Money Back Guarantee</div>
+                    <div>100% Secured Payment</div>
+                    <div>Certificate of Authenticity</div>
+                    <div>Free shipping world wide</div>
                   </div>
                 </aside>
               </div>

@@ -5,8 +5,8 @@ import ProductCard from './ProductCard'
 import { Clock, Package, RefreshCw, Shield, MapPin, Globe, CheckCircle } from 'lucide-react'
 
 const items = [
-  { title: 'Vedic Meditation', body: 'A contemplative practice informing rhythm and form.' },
   { title: 'Geometric Harmony', body: 'Compositions that reconcile order with organic texture.' },
+  { title: 'Vedic Meditation', body: 'A contemplative practice informing rhythm and form.' },
   { title: 'Materiality', body: 'Acrylic layers reveal brushwork and tactile presence.' },
 ]
 
@@ -19,47 +19,10 @@ export default function ArtistSaga() {
   }, [controls, inView])
 
   return (
-    <section ref={ref} className="mt-6 bg-gradient-to-br from-white via-slate-50/50 to-white p-2 sm:p-6 md:p-8 rounded-2xl border-2 border-slate-200 shadow-lg">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 items-start">
-        {/* Artist Image Section */}
-        <div className="md:col-span-1 flex flex-col items-center md:sticky md:top-28 self-start">
-          <motion.div 
-            className="relative group"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 200 }}
-          >
-            {/* Animated gradient ring */}
-            <div className="absolute -inset-3 bg-gradient-to-br from-slate-300 via-slate-400 to-slate-500 rounded-full blur-xl opacity-40 group-hover:opacity-70 animate-pulse transition-all duration-500"></div>
-            
-            <img 
-              src="https://res.cloudinary.com/dp2e8mfvm/image/upload/v1753511549/kwcnlfdzx5kebvxrr1gz.jpg" 
-              alt="Pradip Sarkar" 
-              className="relative w-48 h-48 md:w-64 md:h-64 object-cover rounded-full shadow-2xl ring-4 ring-white border-2 border-slate-200 group-hover:scale-105 transition-transform duration-500" 
-            />
-            
-            {/* Floating badge */}
-            <motion.div
-              className="absolute -bottom-2 -right-2 bg-gradient-to-r from-slate-700 to-slate-900 text-white px-4 py-2 rounded-full text-xs font-bold shadow-xl"
-              animate={{ y: [0, -5, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              Featured Artist
-            </motion.div>
-          </motion.div>
-          
-          <motion.div 
-            className="mt-6 text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-          >
-            <div className="font-bold text-xl text-slate-900">Pradip Sarkar</div>
-            <div className="text-sm text-slate-600 font-medium mt-1">Geometric Abstraction</div>
-          </motion.div>
-        </div>
-
+    <section ref={ref} data-artist-section className="mt-6 bg-gradient-to-br from-white via-slate-50/50 to-white p-2 sm:p-6 md:p-8 rounded-2xl border-2 border-slate-200 shadow-lg">
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 md:gap-8 items-start">
         {/* Content Section */}
-        <div className="md:col-span-2 space-y-6">
+        <div className="space-y-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -71,7 +34,7 @@ export default function ArtistSaga() {
             <div className="text-slate-600 text-sm">A short overview of the artist's themes and practice</div>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 gap-5 max-w-4xl">
             {items.map((it, i) => (
               <motion.div
                 key={it.title}
@@ -104,7 +67,7 @@ export default function ArtistSaga() {
       
       {/* Shipping & Returns Section - Enhanced Paragraph Version */}
       <motion.div 
-        className="mt-10 pt-8 border-t-2 border-slate-200"
+        className="mt-10 pt-8 border-t-2 border-slate-200 max-w-4xl"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -233,12 +196,12 @@ export default function ArtistSaga() {
       </motion.div>
 
       {/* Other Artworks Section */}
-      <div className="mt-10">
+      <div className="mt-10 max-w-4xl">
           <h4 className="font-extrabold text-2xl text-slate-900 mb-4 flex items-center gap-3">
             <span className="w-8 h-[2px] bg-gradient-to-r from-slate-900 to-slate-400"></span>
             OTHER ARTWORKS FROM PRADIP SARKAR
           </h4>
-          <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
+          <div className="mt-4 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 gap-2 sm:gap-3 md:gap-4">
             {[
               { id: 1, title: 'Divine Tunes-11', artist: 'Pradip Sarkar', image: 'https://zigguratss.com/assets/upload/art-1155.jpg', price: '₹1,18,300' },
               { id: 2, title: 'Divine Tunes-09', artist: 'Pradip Sarkar', image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=1200&auto=format', price: '₹98,000' },
@@ -251,12 +214,12 @@ export default function ArtistSaga() {
       </div>
 
       {/* Other Artists Section */}
-      <div className="mt-10">
+      <div className="mt-10 max-w-4xl">
           <h4 className="font-extrabold text-2xl text-slate-900 mb-4 flex items-center gap-3">
             <span className="w-8 h-[2px] bg-gradient-to-r from-slate-900 to-slate-400"></span>
             ARTWORKS FROM OTHER ARTIST'S
           </h4>
-          <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
+          <div className="mt-4 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 gap-2 sm:gap-3 md:gap-4">
             {[
               { id: 'o1', title: 'Tune Of Bengal — 4', artist: 'Sekhar Roy', image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=1200&auto=format', price: '₹45,000' },
               { id: 'o2', title: 'Ocean Of Dreams', artist: 'Uttam Bhattacharya', image: 'https://images.unsplash.com/photo-1551913902-c92207136625?q=80&w=1200&auto=format', price: '₹38,000' },
