@@ -9,7 +9,7 @@ import ArtistSaga from './ArtistSaga'
 import wallImage1 from '../image 1.png'
 import wallImage2 from '../image2.png'
 import wallImage3 from '../image3.png'
-import akhImage from '../akh.webp'
+import image4 from '../image4.png'
 
 const ART_SRC = 'https://zigguratss.com/assets/upload/art-1155.jpg'
 
@@ -20,7 +20,7 @@ const THUMBS = [
   { src: wallImage1, alt: 'Divine Tunes-11 - wall view 1' },
   { src: wallImage2, alt: 'Divine Tunes-11 - wall view 2' },
   { src: wallImage3, alt: 'Divine Tunes-11 - wall view 3' },
-  { src: akhImage, alt: 'Gallery exhibition' }
+  { src: image4, alt: 'Gallery exhibition' }
 ]
 
 export default function ProductDetail() {
