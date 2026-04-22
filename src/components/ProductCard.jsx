@@ -42,7 +42,7 @@ export default function ProductCard({ title, artist, image, price, href = '#', v
   return (
     <>
       <motion.article
-        className="relative glass-card rounded-lg overflow-hidden shadow-sm border border-white/8 product-card"
+        className="relative glass-card rounded-lg overflow-hidden shadow-sm product-card"
         whileHover={!hidden ? { y: -6 } : {}}
         animate={{ 
           opacity: hidden ? 0 : 1,
@@ -58,7 +58,7 @@ export default function ProductCard({ title, artist, image, price, href = '#', v
         }}
       >
   <button onClick={() => setOpen(true)} className={`block w-full ${sizeClasses} overflow-hidden relative p-2 sm:p-4 md:p-6 bg-transparent`}> 
-          <div className="product-image-frame w-full h-full rounded-md relative flex items-center justify-center">
+          <div className="product-image-frame w-full h-full rounded-md relative flex items-center justify-center" style={{ border: '4px solid #000000' }}>
             <img loading="lazy" src={image} alt={title} className="w-full h-full object-cover product-image" />
             <div className="image-veil" />
           </div>
