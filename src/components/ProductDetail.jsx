@@ -232,18 +232,10 @@ export default function ProductDetail() {
             alt={galleryThumbs[active].alt}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            whileHover={{ 
-              scale: 1.1,
-              zIndex: 50,
-              transition: { duration: 0.3, ease: "easeOut" }
-            }}
-            whileTap={{ 
-              scale: 1.1,
-              zIndex: 50,
-              transition: { duration: 0.3, ease: "easeOut" }
-            }}
+           
             transition={{ duration: 0.45 }}
-            className="w-full h-[420px] sm:h-[520px] md:h-[640px] object-contain bg-slate-100 cursor-zoom-in rounded-lg touch-manipulation"
+            className="w-full h-[420px] sm:h-[520px] md:h-[640px] object-contain bg-white cursor-zoom-in rounded-lg"
+style={{ imageRendering: "auto" }}
             onClick={() => setOpen(true)}
           />
 
@@ -269,7 +261,7 @@ export default function ProductDetail() {
                 <img 
                   src={t.src} 
                   alt={t.alt} 
-                  className="w-full h-full object-cover pointer-events-none"
+                  className="w-full h-full object-contain pointer-events-none bg-white"
                 />
               </button>
             );
