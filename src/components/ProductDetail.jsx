@@ -250,13 +250,14 @@ style={{ imageRendering: "auto" }}
           </div>
         </div>
 
-        <div className="flex justify-center items-center space-x-2 sm:space-x-3 md:space-x-4 overflow-x-auto pb-4 px-4 md:px-6" style={{ scrollbarWidth: 'thin', scrollbarColor: '#c9a96e #f1f5f9' }}>
+        <div className="flex justify-start items-center space-x-2 sm:space-x-3 md:space-x-4 overflow-x-auto pb-4 px-0 md:px-6 snap-x snap-mandatory" style={{ scrollbarWidth: 'thin', scrollbarColor: '#c9a96e #f1f5f9' }}>
+          <div className="flex-shrink-0 w-2 sm:w-3 md:w-4"></div>
           {galleryThumbs.map((t, i) => {
             return (
               <button
                 key={`${t.src}-${i}`}
                 onClick={() => setActive(i)}
-                className={`flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-md transition-all cursor-pointer overflow-hidden border-2 ${i === active ? 'border-[#c9a96e]' : 'border-slate-200'} bg-white hover:border-[#c9a96e]`}
+                className={`flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-md transition-all cursor-pointer overflow-hidden border-2 snap-center ${i === active ? 'border-[#c9a96e]' : 'border-slate-200'} bg-white hover:border-[#c9a96e]`}
                 aria-label={`Thumbnail ${i + 1}`}
               >
                 <img 
@@ -267,6 +268,7 @@ style={{ imageRendering: "auto" }}
               </button>
             );
           })}
+          <div className="flex-shrink-0 w-2 sm:w-3 md:w-4"></div>
         </div>
         </div>
 

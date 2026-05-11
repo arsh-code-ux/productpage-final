@@ -1,9 +1,35 @@
 /* Marquee Slider Styles */
 .marquee-container {
   width: 100%;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   position: relative;
   background: linear-gradient(to right, rgba(248, 250, 252, 1) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(248, 250, 252, 1) 100%);
+  scroll-behavior: smooth;
+}
+
+/* Scrollbar styling */
+.marquee-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.marquee-container::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.marquee-container::-webkit-scrollbar-thumb {
+  background: #c9a96e;
+  border-radius: 3px;
+}
+
+.marquee-container::-webkit-scrollbar-thumb:hover {
+  background: #a87d4d;
+}
+
+/* Firefox scrollbar */
+.marquee-container {
+  scrollbar-width: thin;
+  scrollbar-color: #c9a96e #f1f5f9;
 }
 
 .marquee-track {
@@ -12,6 +38,10 @@
   padding: 1rem 0;
   animation: scroll-left 20s linear infinite;
   width: max-content;
+}
+
+.marquee-track.paused-scroll {
+  animation-play-state: paused;
 }
 
 .marquee-track:hover {

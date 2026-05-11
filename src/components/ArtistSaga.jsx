@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { motion, useAnimation } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import ProductCard from './ProductCard'
@@ -16,10 +16,60 @@ const items = [
 export default function ArtistSaga() {
   const controls = useAnimation()
   const [ref, inView] = useInView({ threshold: 0.2 })
+  const marqueeRef1 = useRef(null)
+  const marqueeRef2 = useRef(null)
+  const scrollTimeoutRef1 = useRef(null)
+  const scrollTimeoutRef2 = useRef(null)
+
+  const handleMarqueeScroll = (containerRef, timeoutRef) => {
+    if (!containerRef.current) return
+
+    const track = containerRef.current.querySelector('.marquee-track')
+    if (!track) return
+
+    // Pause animation during manual scroll
+    track.classList.add('paused-scroll')
+
+    // Clear existing timeout
+    if (timeoutRef.current) clearTimeout(timeoutRef.current)
+
+    // Resume animation after scroll stops
+    timeoutRef.current = setTimeout(() => {
+      track.classList.remove('paused-scroll')
+    }, 1500)
+  }
 
   React.useEffect(() => {
     if (inView) controls.start('visible')
   }, [controls, inView])
+
+  React.useEffect(() => {
+    const container1 = marqueeRef1.current
+    const container2 = marqueeRef2.current
+
+    if (container1) {
+      container1.addEventListener('scroll', () => handleMarqueeScroll(marqueeRef1, scrollTimeoutRef1))
+      container1.addEventListener('wheel', () => handleMarqueeScroll(marqueeRef1, scrollTimeoutRef1))
+    }
+
+    if (container2) {
+      container2.addEventListener('scroll', () => handleMarqueeScroll(marqueeRef2, scrollTimeoutRef2))
+      container2.addEventListener('wheel', () => handleMarqueeScroll(marqueeRef2, scrollTimeoutRef2))
+    }
+
+    return () => {
+      if (container1) {
+        container1.removeEventListener('scroll', () => handleMarqueeScroll(marqueeRef1, scrollTimeoutRef1))
+        container1.removeEventListener('wheel', () => handleMarqueeScroll(marqueeRef1, scrollTimeoutRef1))
+      }
+      if (container2) {
+        container2.removeEventListener('scroll', () => handleMarqueeScroll(marqueeRef2, scrollTimeoutRef2))
+        container2.removeEventListener('wheel', () => handleMarqueeScroll(marqueeRef2, scrollTimeoutRef2))
+      }
+      if (scrollTimeoutRef1.current) clearTimeout(scrollTimeoutRef1.current)
+      if (scrollTimeoutRef2.current) clearTimeout(scrollTimeoutRef2.current)
+    }
+  }, [])
 
   return (
     <section ref={ref} data-artist-section className="mt-6 bg-gradient-to-br from-white via-slate-50/50 to-white p-2 sm:p-6 md:p-8 rounded-2xl border-2 border-slate-200 shadow-lg">
@@ -206,7 +256,7 @@ export default function ArtistSaga() {
         </h4>
         
         {/* Marquee Container */}
-        <div className="marquee-container overflow-hidden bg-slate-50 rounded-lg py-4">
+        <div ref={marqueeRef1} className="marquee-container bg-slate-50 rounded-lg py-4">
           <div className="marquee-track" onMouseEnter={(e) => e.currentTarget.style.animationPlayState = 'paused'} onMouseLeave={(e) => e.currentTarget.style.animationPlayState = 'running'}>
             {/* Original items */}
             {[
@@ -243,7 +293,7 @@ export default function ArtistSaga() {
         </h4>
         
         {/* Marquee Container */}
-        <div className="marquee-container overflow-hidden bg-slate-50 rounded-lg py-4">
+        <div ref={marqueeRef2} className="marquee-container bg-slate-50 rounded-lg py-4">
           <div className="marquee-track" onMouseEnter={(e) => e.currentTarget.style.animationPlayState = 'paused'} onMouseLeave={(e) => e.currentTarget.style.animationPlayState = 'running'}>
             {/* Original items */}
             {[
