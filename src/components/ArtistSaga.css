@@ -8,28 +8,14 @@
   scroll-behavior: smooth;
 }
 
-/* Scrollbar styling */
+/* Hide scrollbar but keep scrolling functional */
 .marquee-container::-webkit-scrollbar {
-  height: 6px;
+  display: none;
 }
 
-.marquee-container::-webkit-scrollbar-track {
-  background: #f1f5f9;
-}
-
-.marquee-container::-webkit-scrollbar-thumb {
-  background: #c9a96e;
-  border-radius: 3px;
-}
-
-.marquee-container::-webkit-scrollbar-thumb:hover {
-  background: #a87d4d;
-}
-
-/* Firefox scrollbar */
 .marquee-container {
-  scrollbar-width: thin;
-  scrollbar-color: #c9a96e #f1f5f9;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .marquee-track {
