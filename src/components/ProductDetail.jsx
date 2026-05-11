@@ -250,8 +250,7 @@ style={{ imageRendering: "auto" }}
           </div>
         </div>
 
-        <div className="flex justify-start items-center space-x-2 sm:space-x-3 md:space-x-4 overflow-x-auto pb-4 px-0 md:px-6 snap-x snap-mandatory" style={{ scrollbarWidth: 'thin', scrollbarColor: '#c9a96e #f1f5f9' }}>
-          <div className="flex-shrink-0 w-2 sm:w-3 md:w-4"></div>
+        <div className="flex justify-center items-center space-x-2 sm:space-x-3 md:space-x-4 overflow-x-auto pb-4 snap-x snap-mandatory" style={{ scrollbarWidth: 'thin', scrollbarColor: '#c9a96e #f1f5f9' }}>
           {galleryThumbs.map((t, i) => {
             return (
               <button
@@ -268,7 +267,6 @@ style={{ imageRendering: "auto" }}
               </button>
             );
           })}
-          <div className="flex-shrink-0 w-2 sm:w-3 md:w-4"></div>
         </div>
         </div>
 
