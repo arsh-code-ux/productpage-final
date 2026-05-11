@@ -13,13 +13,14 @@ import wallImage2 from '../image2.png'
 import wallImage3 from '../image3.png'
 import image4 from '../image4.png'
 import akhImage from '../akh.webp'
+import screenshotImage from '../Screenshot from 2026-05-08 14-57-58.png'
 
 const ART_SRC = 'https://zigguratss.com/assets/upload/art-1155.jpg'
 
 const THUMBS = [
-  { src: ART_SRC, alt: 'Divine Tunes-11 - main' },
-  { src: ART_SRC, alt: 'Divine Tunes-11 - alternate' },
-  { src: ART_SRC, alt: 'Divine Tunes-11 - room view' },
+  { src: screenshotImage, alt: 'Divine Tunes-11 - main' },
+  { src: screenshotImage, alt: 'Divine Tunes-11 - alternate' },
+  { src: screenshotImage, alt: 'Divine Tunes-11 - room view' },
   { src: wallImage1, alt: 'Divine Tunes-11 - wall view 1' },
   { src: wallImage2, alt: 'Divine Tunes-11 - wall view 2' },
   { src: wallImage3, alt: 'Divine Tunes-11 - wall view 3' },
@@ -50,9 +51,9 @@ export default function ProductDetail() {
   
   // Gallery State - Dynamic thumbnails
   const [galleryThumbs, setGalleryThumbs] = useState([
-    { src: ART_SRC, alt: 'Divine Tunes-11 - main' },
-    { src: ART_SRC, alt: 'Divine Tunes-11 - alternate' },
-    { src: ART_SRC, alt: 'Divine Tunes-11 - room view' },
+    { src: screenshotImage, alt: 'Divine Tunes-11 - main' },
+    { src: screenshotImage, alt: 'Divine Tunes-11 - alternate' },
+    { src: screenshotImage, alt: 'Divine Tunes-11 - room view' },
     { src: wallImage1, alt: 'Divine Tunes-11 - wall view 1' },
     { src: wallImage2, alt: 'Divine Tunes-11 - wall view 2' },
     { src: wallImage3, alt: 'Divine Tunes-11 - wall view 3' },
@@ -214,7 +215,7 @@ export default function ProductDetail() {
 
   return (
     <div className="relative">
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 lg:gap-12 px-4 md:px-6 lg:px-12">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-0 px-4 md:px-6 lg:px-12">
       {/* Left - Artwork - Takes 70% on desktop */}
       <div className="md:col-span-8 md:pr-4 md:pl-4">
         {/* Image Gallery Section */}
@@ -266,74 +267,90 @@ style={{ imageRendering: "auto" }}
               </button>
             );
           })}
-          
-          {/* Upload Button */}
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setShowUploadModal(true)}
-            className="flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-md border-2 border-dashed border-[#c9a96e] bg-[#c9a96e]/5 hover:bg-[#c9a96e]/10 transition-all cursor-pointer flex items-center justify-center"
-            title="Upload new image"
-          >
-            <div className="flex flex-col items-center gap-1">
-              <Upload size={24} className="text-[#c9a96e]" />
-              <span className="text-xs text-[#c9a96e] font-semibold">Add</span>
+        </div>
+        </div>
+
+        {/* Divine Tunes Box - Mobile Only */}
+        <motion.div
+          className="md:hidden -mx-4 sm:-mx-0 mt-0 px-4 sm:px-0 py-0"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="w-full bg-white rounded-lg border-2 border-slate-300 text-slate-900 shadow-lg overflow-hidden">
+            {/* Content */}
+            <div className="p-4">
+              <h1 className="font-serif text-2xl font-bold leading-tight mb-0.5">Divine Tunes-11</h1>
+              <p className="text-xs text-slate-600 mb-2">Pradip Sarkar</p>
+
+              {/* Price Section */}
+              <div className="mb-2.5 pb-2.5 border-b border-slate-200">
+                <p className="text-xs text-slate-500 font-medium">Price</p>
+                <p className="text-lg font-bold text-slate-900">₹1,18,300 <span className="text-xs text-slate-500 font-normal">($1,577.33)</span></p>
+                <p className="text-xs text-slate-500">Tax included</p>
+              </div>
+
+              {/* Artwork Details Grid - Expanded */}
+              <div className="mb-2.5 pb-2.5 border-b border-slate-200">
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  <div>
+                    <p className="text-slate-500 font-medium">Size (inch)</p>
+                    <p className="font-bold text-slate-900">32.00 x 30.00</p>
+                  </div>
+                  <div>
+                    <p className="text-slate-500 font-medium">Size (cm)</p>
+                    <p className="font-bold text-slate-900">81.28 x 76.20</p>
+                  </div>
+                  <div>
+                    <p className="text-slate-500 font-medium">Type</p>
+                    <p className="font-bold text-slate-900">Painting</p>
+                  </div>
+                  <div>
+                    <p className="text-slate-500 font-medium">Year</p>
+                    <p className="font-bold text-slate-900">2023</p>
+                  </div>
+                  <div>
+                    <p className="text-slate-500 font-medium">Medium</p>
+                    <p className="font-bold text-slate-900">Acrylic Canvas</p>
+                  </div>
+                  <div>
+                    <p className="text-slate-500 font-medium">Style</p>
+                    <p className="font-bold text-slate-900">Geometric</p>
+                  </div>
+                  <div>
+                    <p className="text-slate-500 font-medium">Technique</p>
+                    <p className="font-bold text-slate-900">Layered</p>
+                  </div>
+                  <div>
+                    <p className="text-slate-500 font-medium">Category</p>
+                    <p className="font-bold text-slate-900">Abstract</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Features */}
+              <div className="mb-2.5 space-y-1 text-xs">
+                <div className="flex items-center gap-2"><CheckCircle size={12} className="text-green-600 flex-shrink-0" /> <span className="text-slate-700">14-Days Money Back Guarantee</span></div>
+                <div className="flex items-center gap-2"><Shield size={12} className="text-blue-600 flex-shrink-0" /> <span className="text-slate-700">100% Secured Payment</span></div>
+                <div className="flex items-center gap-2"><CheckCircle size={12} className="text-green-600 flex-shrink-0" /> <span className="text-slate-700">Certificate of Authenticity</span></div>
+                <div className="flex items-center gap-2"><Truck size={12} className="text-amber-600 flex-shrink-0" /> <span className="text-slate-700">Free shipping world wide</span></div>
+              </div>
+
+              {/* Buttons */}
+              <div className="flex gap-1.5">
+                <button className="flex-1 py-2.5 px-2 bg-[#c9a96e] hover:bg-[#a87d4d] text-white rounded text-xs font-semibold transition-all flex items-center justify-center gap-1">
+                  <ShoppingCart size={13} /> Add
+                </button>
+                <button onClick={() => setShowOfferModal(true)} className="flex-1 py-2.5 px-2 border-2 border-[#c9a96e] text-[#c9a96e] hover:bg-[#c9a96e] hover:text-white rounded text-xs font-semibold transition-all">
+                  Offer
+                </button>
+                <button className="flex-1 py-2.5 px-2 bg-[#c9a96e] hover:bg-[#a87d4d] text-white rounded text-xs font-semibold transition-all">
+                  Buy
+                </button>
+              </div>
             </div>
-          </motion.button>
-        </div>
-        </div>
-
-        {/* Divine Tunes Box - Mobile Only (shows after images, before tabs) */}
-        <div className="md:hidden mt-6 mx-2 sm:mx-0">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="w-full flex flex-col bg-white rounded-xl border-2 border-slate-300 text-slate-900 shadow-xl overflow-hidden"
-          >
-            {/* Top Section - Price & Buttons */}
-            <div className="flex-shrink-0 p-5 sm:p-7 border-b border-slate-200">
-              <h1 className="font-serif text-3xl sm:text-4xl font-bold">Divine Tunes-11</h1>
-              <a href="#" className="text-sm text-slate-600 block mt-2 hover:underline">Pradip Sarkar</a>
-
-              <div className="mt-6">
-                <div className="text-sm text-slate-500">Price</div>
-                <div className="text-xl sm:text-2xl font-semibold mt-1">₹1,18,300 <span className="text-xs sm:text-sm text-slate-500 font-normal">($1,577.33)</span></div>
-                <div className="text-xs text-slate-500 mt-1">Tax included</div>
-              </div>
-
-              <div className="mt-4 space-y-2 text-xs sm:text-sm">
-                <div className="flex items-center space-x-2 text-slate-700"><RefreshCw size={14} className="sm:w-4 sm:h-4 flex-shrink-0" /> <span>14-Days Money Back Guarantee</span></div>
-                <div className="flex items-center space-x-2 text-slate-700"><Shield size={14} className="sm:w-4 sm:h-4 flex-shrink-0" /> <span>100% Secured Payment</span></div>
-                <div className="flex items-center space-x-2 text-slate-700"><CheckCircle size={14} className="sm:w-4 sm:h-4 flex-shrink-0" /> <span>Certificate of Authenticity</span></div>
-                <div className="flex items-center space-x-2 text-slate-700"><Truck size={14} className="sm:w-4 sm:h-4 flex-shrink-0" /> <span>Free shipping world wide</span></div>
-              </div>
-
-              <div className="mt-6 flex flex-col gap-2">
-                <button className="w-full flex items-center justify-center gap-1.5 px-3 py-3 bg-[#c9a96e] hover:bg-[#a87d4d] text-white rounded-lg font-semibold transition-all text-xs sm:text-sm">
-                  <ShoppingCart size={15} /> <span>Add to Cart</span>
-                </button>
-                <button 
-                  onClick={() => setShowOfferModal(true)}
-                  className="w-full flex items-center justify-center gap-1.5 px-3 py-3 border-2 border-[#c9a96e] rounded-lg text-[#c9a96e] hover:bg-[#c9a96e] hover:text-white font-semibold bg-white transition-all text-xs sm:text-sm"
-                >
-                  <MessageCircle size={15} /> <span>Make an Offer</span>
-                </button>
-                <button className="w-full flex items-center justify-center gap-1.5 px-3 py-3 bg-[#c9a96e] hover:bg-[#a87d4d] text-white rounded-lg font-semibold transition-all text-xs sm:text-sm">
-                  <CreditCard size={15} /> <span>Buy Now</span>
-                </button>
-              </div>
-
-              {/* Trust Badges */}
-              <div className="mt-4 space-y-2.5 text-xs sm:text-sm">
-                <div className="flex items-center space-x-2 text-slate-700"><RefreshCw size={14} className="sm:w-4 sm:h-4 flex-shrink-0 text-[#c9a96e]" /> <span className="text-[#c9a96e] font-medium">14-Days Money Back Guarantee</span></div>
-                <div className="flex items-center space-x-2 text-slate-700"><Shield size={14} className="sm:w-4 sm:h-4 flex-shrink-0 text-[#c9a96e]" /> <span className="text-[#c9a96e] font-medium">100% Secured Payment</span></div>
-                <div className="flex items-center space-x-2 text-slate-700"><CheckCircle size={14} className="sm:w-4 sm:h-4 flex-shrink-0 text-[#c9a96e]" /> <span className="text-[#c9a96e] font-medium">Certificate of Authenticity</span></div>
-                <div className="flex items-center space-x-2 text-slate-700"><Truck size={14} className="sm:w-4 sm:h-4 flex-shrink-0 text-[#c9a96e]" /> <span className="text-[#c9a96e] font-medium">Free shipping world wide</span></div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
 
         <AnimatePresence>
           {open && (
@@ -732,12 +749,12 @@ style={{ imageRendering: "auto" }}
       </div>
 
       {/* Right - Completely Fixed Sidebar - Takes 30% - Desktop Only */}
-      <div className="hidden md:flex md:col-span-4 md:fixed md:top-6 md:right-6 md:w-[calc(33%-3rem)] md:h-[calc(100vh-3rem)] md:overflow-auto md:justify-center md:items-center md:px-3">
+  <div className="hidden md:flex md:col-span-4 md:fixed md:top-0 md:right-0 md:w-[580px] md:h-screen md:overflow-auto md:justify-center md:items-start md:px-4 md:py-6">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="w-[80%] max-h-[85vh] flex flex-col bg-white rounded-xl border-2 border-slate-300 text-slate-900 shadow-2xl overflow-hidden"
+  className="w-full min-h-[90vh] flex flex-col bg-white rounded-xl border-2 border-slate-300 text-slate-900 shadow-2xl overflow-hidden"
         >
           {/* Top Section - Price & Buttons */}
           <div className="flex-shrink-0 p-5 sm:p-7 border-b border-slate-200">
@@ -748,6 +765,28 @@ style={{ imageRendering: "auto" }}
               <div className="text-sm text-slate-500">Price</div>
               <div className="text-xl sm:text-2xl font-semibold mt-1">₹1,18,300 <span className="text-xs sm:text-sm text-slate-500 font-normal">($1,577.33)</span></div>
               <div className="text-xs text-slate-500 mt-1">Tax included</div>
+            </div>
+
+            {/* Artwork Details - Added */}
+            <div className="mt-4 pt-3 border-t border-slate-200">
+              <div className="space-y-2.5 text-xs sm:text-sm mb-3">
+                <div>
+                  <p className="text-slate-500 font-medium">Size (inch)</p>
+                  <p className="font-bold text-slate-900">32.00 x 30.00</p>
+                </div>
+                <div>
+                  <p className="text-slate-500 font-medium">Size (cm)</p>
+                  <p className="font-bold text-slate-900">81.28 x 76.20</p>
+                </div>
+                <div>
+                  <p className="text-slate-500 font-medium">Type</p>
+                  <p className="font-bold text-slate-900">Painting</p>
+                </div>
+                <div>
+                  <p className="text-slate-500 font-medium">Year</p>
+                  <p className="font-bold text-slate-900">2023</p>
+                </div>
+              </div>
             </div>
 
             <div className="mt-4 space-y-2 text-xs sm:text-sm">
@@ -772,12 +811,12 @@ style={{ imageRendering: "auto" }}
               </button>
             </div>
 
-            {/* Trust Badges */}
-            <div className="mt-4 space-y-2.5 text-xs sm:text-sm">
-              <div className="flex items-center space-x-2 text-slate-700"><RefreshCw size={14} className="sm:w-4 sm:h-4 flex-shrink-0 text-[#c9a96e]" /> <span className="text-[#c9a96e] font-medium">14-Days Money Back Guarantee</span></div>
-              <div className="flex items-center space-x-2 text-slate-700"><Shield size={14} className="sm:w-4 sm:h-4 flex-shrink-0 text-[#c9a96e]" /> <span className="text-[#c9a96e] font-medium">100% Secured Payment</span></div>
-              <div className="flex items-center space-x-2 text-slate-700"><CheckCircle size={14} className="sm:w-4 sm:h-4 flex-shrink-0 text-[#c9a96e]" /> <span className="text-[#c9a96e] font-medium">Certificate of Authenticity</span></div>
-              <div className="flex items-center space-x-2 text-slate-700"><Truck size={14} className="sm:w-4 sm:h-4 flex-shrink-0 text-[#c9a96e]" /> <span className="text-[#c9a96e] font-medium">Free shipping world wide</span></div>
+            {/* Trust Badges - Golden */}
+            <div className="mt-8 pt-6 border-t border-slate-200 space-y-2.5 text-xs sm:text-sm">
+              <div className="flex items-center space-x-2"><RefreshCw size={14} className="text-[#c9a96e] flex-shrink-0" /> <span className="text-[#c9a96e] font-medium">14-Days Money Back Guarantee</span></div>
+              <div className="flex items-center space-x-2"><Shield size={14} className="text-[#c9a96e] flex-shrink-0" /> <span className="text-[#c9a96e] font-medium">100% Secured Payment</span></div>
+              <div className="flex items-center space-x-2"><CheckCircle size={14} className="text-[#c9a96e] flex-shrink-0" /> <span className="text-[#c9a96e] font-medium">Certificate of Authenticity</span></div>
+              <div className="flex items-center space-x-2"><Truck size={14} className="text-[#c9a96e] flex-shrink-0" /> <span className="text-[#c9a96e] font-medium">Free shipping world wide</span></div>
             </div>
           </div>
         </motion.div>

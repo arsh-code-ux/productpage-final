@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { motion, useAnimation } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import ProductCard from './ProductCard'
 import { Clock, Package, RefreshCw, Shield, MapPin, Globe, CheckCircle } from 'lucide-react'
+import screenshotImage from '../Screenshot from 2026-05-08 14-57-58.png'
+import flowersImage from '../Screenshot from 2026-05-08 15-14-55.png'
+import './ArtistSaga.css'
 
 const items = [
   { title: 'Geometric Harmony', body: 'Compositions that reconcile order with organic texture.' },
@@ -195,41 +198,79 @@ export default function ArtistSaga() {
         </motion.div>
       </motion.div>
 
-      {/* Other Artworks Section */}
-      <div className="mt-10 max-w-4xl">
-          <h4 className="font-extrabold text-2xl text-slate-900 mb-4 flex items-center gap-3">
-            <span className="w-8 h-[2px] bg-gradient-to-r from-slate-900 to-slate-400"></span>
-            OTHER ARTWORKS FROM PRADIP SARKAR
-          </h4>
-          <div className="mt-4 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 gap-2 sm:gap-3 md:gap-4">
+      {/* Other Artworks Section - Infinite Marquee Slider */}
+      <div className="mt-10 max-w-full">
+        <h4 className="font-extrabold text-2xl text-slate-900 mb-4 flex items-center gap-3 px-4">
+          <span className="w-8 h-[2px] bg-gradient-to-r from-slate-900 to-slate-400"></span>
+          OTHER ARTWORKS FROM PRADIP SARKAR
+        </h4>
+        
+        {/* Marquee Container */}
+        <div className="marquee-container overflow-hidden bg-slate-50 rounded-lg py-4">
+          <div className="marquee-track" onMouseEnter={(e) => e.currentTarget.style.animationPlayState = 'paused'} onMouseLeave={(e) => e.currentTarget.style.animationPlayState = 'running'}>
+            {/* Original items */}
             {[
-              { id: 1, title: 'Divine Tunes-11', artist: 'Pradip Sarkar', image: 'https://zigguratss.com/assets/upload/art-1155.jpg', price: '₹1,18,300' },
-              { id: 2, title: 'Divine Tunes-09', artist: 'Pradip Sarkar', image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=1200&auto=format', price: '₹98,000' },
+              { id: 1, title: 'Divine Tunes-11', artist: 'Pradip Sarkar', image: flowersImage, price: '₹1,18,300' },
+              { id: 2, title: 'Divine Tunes-09', artist: 'Pradip Sarkar', image: screenshotImage, price: '₹98,000' },
               { id: 3, title: 'Divine Tunes-05', artist: 'Pradip Sarkar', image: 'https://images.unsplash.com/photo-1551913902-c92207136625?q=80&w=1200&auto=format', price: '₹75,000' },
               { id: 4, title: 'Divine Tunes-02', artist: 'Pradip Sarkar', image: 'https://images.unsplash.com/photo-1578301978162-7aae4d755744?q=80&w=1200&auto=format', price: '₹62,500' },
             ].map((p) => (
-              <ProductCard key={p.id} title={p.title} artist={p.artist} image={p.image} price={p.price} href="#" verified={true} />
+              <div key={`original-${p.id}`} className="marquee-item">
+                <ProductCard title={p.title} artist={p.artist} image={p.image} price={p.price} href="#" verified={true} />
+              </div>
+            ))}
+            
+            {/* Duplicate items for seamless loop */}
+            {[
+              { id: 1, title: 'Divine Tunes-11', artist: 'Pradip Sarkar', image: flowersImage, price: '₹1,18,300' },
+              { id: 2, title: 'Divine Tunes-09', artist: 'Pradip Sarkar', image: screenshotImage, price: '₹98,000' },
+              { id: 3, title: 'Divine Tunes-05', artist: 'Pradip Sarkar', image: 'https://images.unsplash.com/photo-1551913902-c92207136625?q=80&w=1200&auto=format', price: '₹75,000' },
+              { id: 4, title: 'Divine Tunes-02', artist: 'Pradip Sarkar', image: 'https://images.unsplash.com/photo-1578301978162-7aae4d755744?q=80&w=1200&auto=format', price: '₹62,500' },
+            ].map((p) => (
+              <div key={`duplicate-${p.id}`} className="marquee-item">
+                <ProductCard title={p.title} artist={p.artist} image={p.image} price={p.price} href="#" verified={true} />
+              </div>
             ))}
           </div>
+        </div>
       </div>
 
-      {/* Other Artists Section */}
-      <div className="mt-10 max-w-4xl">
-          <h4 className="font-extrabold text-2xl text-slate-900 mb-4 flex items-center gap-3">
-            <span className="w-8 h-[2px] bg-gradient-to-r from-slate-900 to-slate-400"></span>
-            ARTWORKS FROM OTHER ARTIST'S
-          </h4>
-          <div className="mt-4 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 gap-2 sm:gap-3 md:gap-4">
+      {/* Other Artists Section - Infinite Marquee Slider */}
+      <div className="mt-10 max-w-full">
+        <h4 className="font-extrabold text-2xl text-slate-900 mb-4 flex items-center gap-3 px-4">
+          <span className="w-8 h-[2px] bg-gradient-to-r from-slate-900 to-slate-400"></span>
+          ARTWORKS FROM OTHER ARTIST'S
+        </h4>
+        
+        {/* Marquee Container */}
+        <div className="marquee-container overflow-hidden bg-slate-50 rounded-lg py-4">
+          <div className="marquee-track" onMouseEnter={(e) => e.currentTarget.style.animationPlayState = 'paused'} onMouseLeave={(e) => e.currentTarget.style.animationPlayState = 'running'}>
+            {/* Original items */}
             {[
               { id: 'o1', title: 'Tune Of Bengal — 4', artist: 'Sekhar Roy', image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=1200&auto=format', price: '₹45,000' },
               { id: 'o2', title: 'Ocean Of Dreams', artist: 'Uttam Bhattacharya', image: 'https://images.unsplash.com/photo-1551913902-c92207136625?q=80&w=1200&auto=format', price: '₹38,000' },
               { id: 'o3', title: 'Eternal Grace', artist: 'Priyanka Bardhan', image: 'https://images.unsplash.com/photo-1578301978162-7aae4d755744?q=80&w=1200&auto=format', price: '₹55,000' },
               { id: 'o4', title: 'Inner Peace 6', artist: 'Monalisa Sarkar Mitra', image: 'https://images.unsplash.com/photo-1561214115-f2f134cc4912?q=80&w=1200&auto=format', price: '₹29,500' },
             ].map((p) => (
-              <ProductCard key={p.id} title={p.title} artist={p.artist} image={p.image} price={p.price} href="#" />
+              <div key={`original-${p.id}`} className="marquee-item">
+                <ProductCard title={p.title} artist={p.artist} image={p.image} price={p.price} href="#" />
+              </div>
+            ))}
+            
+            {/* Duplicate items for seamless loop */}
+            {[
+              { id: 'o1', title: 'Tune Of Bengal — 4', artist: 'Sekhar Roy', image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=1200&auto=format', price: '₹45,000' },
+              { id: 'o2', title: 'Ocean Of Dreams', artist: 'Uttam Bhattacharya', image: 'https://images.unsplash.com/photo-1551913902-c92207136625?q=80&w=1200&auto=format', price: '₹38,000' },
+              { id: 'o3', title: 'Eternal Grace', artist: 'Priyanka Bardhan', image: 'https://images.unsplash.com/photo-1578301978162-7aae4d755744?q=80&w=1200&auto=format', price: '₹55,000' },
+              { id: 'o4', title: 'Inner Peace 6', artist: 'Monalisa Sarkar Mitra', image: 'https://images.unsplash.com/photo-1561214115-f2f134cc4912?q=80&w=1200&auto=format', price: '₹29,500' },
+            ].map((p) => (
+              <div key={`duplicate-${p.id}`} className="marquee-item">
+                <ProductCard title={p.title} artist={p.artist} image={p.image} price={p.price} href="#" />
+              </div>
             ))}
           </div>
         </div>
+      </div>
     </section>
   )
 }

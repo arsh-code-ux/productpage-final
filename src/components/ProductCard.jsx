@@ -75,7 +75,7 @@ export default function ProductCard({ title, artist, image, price, href = '#', v
           </div>
 
           <div className="mt-3 flex items-center gap-3">
-            <button onClick={() => setOpen(true)} className="text-xs px-3 py-2 bg-[#065F46] text-white rounded-md">Quick View</button>
+            <button onClick={() => window.location.href = '/'} className="text-xs px-3 py-2 bg-[#065F46] text-white rounded-md">Quick View</button>
             <button className="text-xs px-3 py-2 border border-white/10 rounded-md text-white/90 bg-white/6">Add</button>
           </div>
         </div>

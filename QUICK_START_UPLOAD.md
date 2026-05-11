@@ -20,7 +20,11 @@
 
 ## 📸 What Happens
 
-### **Your Image Displayed as:**
+### **Your Image Displayed as:**name stores text
+
+age stores number
+
+height stores decimal value
 
 ```
 SAME IMAGE - 4 DIFFERENT WAYS ON YOUR WALL!
