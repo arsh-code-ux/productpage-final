@@ -217,10 +217,15 @@ export default function ProductDetail() {
   // Scroll thumbnail container to make first thumbnails visible on mobile
   useEffect(() => {
     if (thumbnailContainerRef.current) {
-      // Delay scroll to ensure DOM is fully rendered
+      // Force scroll to 0 to show first items
+      thumbnailContainerRef.current.scrollLeft = 0
+      
+      // Also set via scrollTo with immediate behavior
       setTimeout(() => {
-        thumbnailContainerRef.current?.scrollTo({ left: 0, behavior: 'smooth' })
-      }, 100)
+        if (thumbnailContainerRef.current) {
+          thumbnailContainerRef.current.scrollTo({ left: 0, behavior: 'instant' })
+        }
+      }, 50)
     }
   }, [])
 
@@ -261,7 +266,7 @@ style={{ imageRendering: "auto" }}
           </div>
         </div>
 
-        <div ref={thumbnailContainerRef} className="flex justify-center items-center space-x-2 sm:space-x-3 md:space-x-4 overflow-x-auto pb-4 snap-x snap-mandatory" style={{ scrollbarWidth: 'thin', scrollbarColor: '#c9a96e #f1f5f9' }}>
+        <div ref={thumbnailContainerRef} className="flex items-center space-x-2 sm:space-x-3 md:space-x-4 overflow-x-auto pb-4 snap-x snap-mandatory px-0" style={{ scrollbarWidth: 'none', scrollbarColor: '#c9a96e #f1f5f9' }}>
           {galleryThumbs.map((t, i) => {
             return (
               <button
