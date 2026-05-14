@@ -8,12 +8,17 @@ import { analyzeImageOrientation, optimizeImageForUpload, validateImage, getOrie
 import ArtistCardMini from './ArtistCardMini'
 import ArtworkSlider from './ArtworkSlider'
 import ArtistSaga from './ArtistSaga'
+import WallHangedImageGenerator from './WallHangedImageGenerator'
 import wallImage1 from '../image 1.png'
 import wallImage2 from '../image2.png'
 import wallImage3 from '../image3.png'
 import image4 from '../image4.png'
 import akhImage from '../akh.webp'
 import screenshotImage from '../Screenshot from 2026-05-08 14-57-58.png'
+import testImage from '../aasbshjdbas.webp'
+import testImage2 from '../testImage.jpg'
+import hansImage from '../hans.jpg'
+
 
 const ART_SRC = 'https://zigguratss.com/assets/upload/art-1155.jpg'
 
@@ -58,7 +63,10 @@ export default function ProductDetail() {
     { src: wallImage1, alt: 'Divine Tunes-11 - wall view 1' },
     { src: wallImage2, alt: 'Divine Tunes-11 - wall view 2' },
     { src: wallImage3, alt: 'Divine Tunes-11 - wall view 3' },
-    { src: image4, alt: 'Gallery exhibition' }
+    { src: image4, alt: 'Gallery exhibition' },
+    { src: testImage, alt: 'Test wall hung', isWallHung: true },
+    { src: testImage2, alt: 'Test image 2', isWallHung: true },
+    { src: hansImage, alt: 'Test image 3', isWallHung: true }
   ])
   
   const [offerFormData, setOfferFormData] = useState({
@@ -243,18 +251,30 @@ export default function ProductDetail() {
             border: '1px solid #e2e8f0'
           }}
         >
-          <motion.img
+          <motion.div
             key={active}
-            src={galleryThumbs[active].src}
-            alt={galleryThumbs[active].alt}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-           
             transition={{ duration: 0.45 }}
-            className="w-full h-[420px] sm:h-[520px] md:h-[640px] object-contain bg-white cursor-zoom-in rounded-lg"
-style={{ imageRendering: "auto" }}
+            className="w-full h-[420px] sm:h-[520px] md:h-[640px] bg-white cursor-zoom-in rounded-lg flex items-center justify-center"
             onClick={() => setOpen(true)}
-          />
+          >
+            {galleryThumbs[active]?.isWallHung ? (
+              <WallHangedImageGenerator 
+                src={galleryThumbs[active].src}
+                alt={galleryThumbs[active].alt}
+                width={800}
+                height={480}
+              />
+            ) : (
+              <img
+                src={galleryThumbs[active].src}
+                alt={galleryThumbs[active].alt}
+                className="w-full h-full object-contain"
+                style={{ imageRendering: "auto" }}
+              />
+            )}
+          </motion.div>
 
           <div className="absolute top-2 right-2 sm:top-4 sm:right-4 flex items-center space-x-2 sm:space-x-3" style={active >= 3 ? { top: '32px', right: '32px' } : {}}>
             <button aria-label="Zoom" onClick={() => setOpen(true)} className="p-1.5 sm:p-2 bg-white rounded-md shadow-sm border-2 border-[#c9a96e] hover:bg-[#c9a96e] hover:border-[#a87d4d] transition-all">
@@ -275,11 +295,20 @@ style={{ imageRendering: "auto" }}
                 className={`flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-md transition-all cursor-pointer overflow-hidden border-2 snap-center ${i === active ? 'border-[#c9a96e]' : 'border-slate-200'} bg-white hover:border-[#c9a96e]`}
                 aria-label={`Thumbnail ${i + 1}`}
               >
-                <img 
-                  src={t.src} 
-                  alt={t.alt} 
-                  className="w-full h-full object-contain pointer-events-none bg-white"
-                />
+                {t.isWallHung ? (
+                  <WallHangedImageGenerator 
+                    src={t.src} 
+                    alt={t.alt}
+                    width={320}
+                    height={192}
+                  />
+                ) : (
+                  <img 
+                    src={t.src} 
+                    alt={t.alt} 
+                    className="w-full h-full object-contain pointer-events-none bg-white"
+                  />
+                )}
               </button>
             );
           })}
