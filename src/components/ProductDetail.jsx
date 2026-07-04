@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ZoomIn, Maximize2, ShoppingCart, CreditCard, Truck, CheckCircle, X, Share2, MessageCircle, Package, Clock, MapPin, Shield, RefreshCw, Globe, Upload, AlertCircle } from 'lucide-react'
+import { ZoomIn, Maximize2, ShoppingCart, CreditCard, Truck, CheckCircle, X, Share2, MessageCircle, Package, Clock, MapPin, Shield, RefreshCw, Globe, Upload, AlertCircle, Star } from 'lucide-react'
 import ArtworkStatement from './ArtworkStatement'
 import ReadMore from './ReadMore'
 import productService from '../services/productService'
@@ -13,6 +13,10 @@ import wallImage1 from '../image 1.png'
 import wallImage2 from '../image2.png'
 import wallImage3 from '../image3.png'
 import image4 from '../image4.png'
+import firstThumb from '../firstthumb.jpeg'
+import secondThumb from '../secondthumb.jpeg'
+import thirdThumb from '../thirdThumb.jpeg'
+import fourthThumb from '../fourththumb.jpeg'
 import akhImage from '../akh.webp'
 import screenshotImage from '../Screenshot from 2026-05-08 14-57-58.png'
 import testImage from '../aasbshjdbas.webp'
@@ -22,20 +26,11 @@ import hansImage from '../hans.jpg'
 
 const ART_SRC = 'https://zigguratss.com/assets/upload/art-1155.jpg'
 
-const THUMBS = [
-  { src: screenshotImage, alt: 'Divine Tunes-11 - main' },
-  { src: screenshotImage, alt: 'Divine Tunes-11 - alternate' },
-  { src: screenshotImage, alt: 'Divine Tunes-11 - room view' },
-  { src: wallImage1, alt: 'Divine Tunes-11 - wall view 1' },
-  { src: wallImage2, alt: 'Divine Tunes-11 - wall view 2' },
-  { src: wallImage3, alt: 'Divine Tunes-11 - wall view 3' },
-  { src: image4, alt: 'Gallery exhibition' }
-]
-
 export default function ProductDetail() {
   console.log('🔧 ProductDetail rendering...')
   const [active, setActive] = useState(0)
   const [tab, setTab] = useState('artwork')
+  const [copiedArtwork, setCopiedArtwork] = useState(false)
   const [open, setOpen] = useState(false)
   const [added, setAdded] = useState(false)
   const [showMagnifier, setShowMagnifier] = useState(false)
@@ -57,16 +52,14 @@ export default function ProductDetail() {
   
   // Gallery State - Dynamic thumbnails
   const [galleryThumbs, setGalleryThumbs] = useState([
-    { src: screenshotImage, alt: 'Divine Tunes-11 - main' },
-    { src: screenshotImage, alt: 'Divine Tunes-11 - alternate' },
-    { src: screenshotImage, alt: 'Divine Tunes-11 - room view' },
+    { src: firstThumb, alt: 'Divine Tunes-11 - thumbnail 1' },
+    { src: secondThumb, alt: 'Divine Tunes-11 - thumbnail 2' },
     { src: wallImage1, alt: 'Divine Tunes-11 - wall view 1' },
     { src: wallImage2, alt: 'Divine Tunes-11 - wall view 2' },
     { src: wallImage3, alt: 'Divine Tunes-11 - wall view 3' },
     { src: image4, alt: 'Gallery exhibition' },
-    { src: testImage, alt: 'Test wall hung', isWallHung: true },
-    { src: testImage2, alt: 'Test image 2', isWallHung: true },
-    { src: hansImage, alt: 'Test image 3', isWallHung: true }
+    { src: fourthThumb, alt: 'Divine Tunes-11 - thumbnail 4' },
+    { src: thirdThumb, alt: 'Divine Tunes-11 - thumbnail 3' }
   ])
   
   const [offerFormData, setOfferFormData] = useState({
@@ -222,6 +215,34 @@ export default function ProductDetail() {
     return () => clearTimeout(t)
   }, [added])
 
+  useEffect(() => {
+    let t
+    if (copiedArtwork) t = setTimeout(() => setCopiedArtwork(false), 1400)
+    return () => clearTimeout(t)
+  }, [copiedArtwork])
+
+  const handleCopyArtworkSummary = async () => {
+    const summary = [
+      'Divine Tunes-11 Painting series',
+      'WxH: 32.00 x 30.00 inch (81.28 x 76.20 cm)',
+      'Type of Artwork: Painting',
+      'Shipped as: Rolled',
+      'Category: Portrait',
+      'Style: Geometric',
+      'Techniques: Acrylic',
+      'Material used: Canvas',
+      'Medium: Acrylic',
+      'Year: 2018'
+    ].join('\n')
+
+    try {
+      await navigator.clipboard.writeText(summary)
+      setCopiedArtwork(true)
+    } catch (error) {
+      console.error('Failed to copy artwork summary', error)
+    }
+  }
+
   // Scroll thumbnail container to make first thumbnails visible on mobile
   useEffect(() => {
     if (thumbnailContainerRef.current) {
@@ -286,7 +307,7 @@ export default function ProductDetail() {
           </div>
         </div>
 
-        <div ref={thumbnailContainerRef} className="flex md:justify-center items-center space-x-2 sm:space-x-3 md:space-x-4 overflow-x-auto pb-4 snap-x snap-mandatory px-0" style={{ scrollbarWidth: 'none', scrollbarColor: '#c9a96e #f1f5f9' }}>
+        <div ref={thumbnailContainerRef} className="flex justify-start md:justify-start items-center space-x-2 sm:space-x-3 md:space-x-4 overflow-x-auto pb-4 snap-x snap-mandatory px-0" style={{ scrollbarWidth: 'none', scrollbarColor: '#c9a96e #f1f5f9' }}>
           {galleryThumbs.map((t, i) => {
             return (
               <button
@@ -524,6 +545,7 @@ export default function ProductDetail() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
+                className="space-y-6"
               >
                 <motion.h3 
                   className="text-3xl md:text-4xl font-serif font-extrabold text-slate-900 mb-6 flex items-center gap-4"
@@ -539,42 +561,119 @@ export default function ProductDetail() {
                   ></motion.span>
                   <span>About the Artwork</span>
                 </motion.h3>
-                
-                <div className="space-y-4">
-                  <div className="font-semibold text-base">Divine Tunes-11 Painting series</div>
-                  <div>WxH: 32.00 x 30.00 inch (81.28 x 76.20 cm)</div>
-                  <div>Type of Artwork: Painting</div>
-                  <div>Shipped as: Rolled</div>
 
-                  <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    <div><span className="font-semibold">Category:</span> Portrait</div>
-                    <div><span className="font-semibold">Style:</span> Geometric</div>
-                    <div><span className="font-semibold">Techniques:</span> Acrylic</div>
-                    <div><span className="font-semibold">Material used:</span> Canvas</div>
-                    <div><span className="font-semibold">Size (WxH):</span> 45.72 x 50.80 cm</div>
-                    <div><span className="font-semibold">Medium:</span> Acrylic</div>
-                    <div><span className="font-semibold">Selling Options:</span> Original</div>
-                    <div><span className="font-semibold">Year:</span> 2018</div>
-                    <div className="col-span-full"><span className="font-semibold">Delivery:</span> Stretched</div>
+                <div className="rounded-3xl border border-[#eadcc1] bg-gradient-to-br from-white via-[#fffdf8] to-[#f8f3e8] p-4 sm:p-6 shadow-[0_20px_60px_rgba(201,169,110,0.12)]">
+                  <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                    <div className="max-w-3xl space-y-4">
+                      <div className="inline-flex items-center rounded-full border border-[#ead4a7] bg-[#c9a96e]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-[#8f6a39]">
+                        Artwork profile
+                      </div>
+                      <div className="text-2xl font-semibold text-slate-900">Divine Tunes-11 Painting series</div>
+                      <p className="text-sm sm:text-base leading-7 text-slate-700">
+                        This piece is part of the 'DIVINE TUNES' series — a saga of urge whereby depicted deeds inspire others.
+                        Love, affection, innocence, bonding and festivity are the root of the sonata that created this ambiance of
+                        expression and effect. Art in itself is the final message.
+                      </p>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2 lg:justify-end">
+                      <button
+                        onClick={handleCopyArtworkSummary}
+                        className="inline-flex items-center gap-2 rounded-full bg-[#c9a96e] px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#b48a50]"
+                      >
+                        <Share2 size={16} />
+                        {copiedArtwork ? 'Copied' : 'Copy summary'}
+                      </button>
+                      <button
+                        onClick={() => setTab('artist')}
+                        className="inline-flex items-center gap-2 rounded-full border border-[#d9c8aa] bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-[#c9a96e] hover:text-[#8f6a39]"
+                      >
+                        <MessageCircle size={16} />
+                        Artist bio
+                      </button>
+                    </div>
                   </div>
 
-                  <div className="mt-4">This piece is part of the 'DIVINE TUNES' series — a saga of urge whereby depicted deeds inspire others. Love, affection, innocence, bonding and festivity are the root of the sonata that created this ambiance of expression and effect. Art in itself is the final message.</div>
+                  <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
+                    {[
+                      { label: 'WxH', value: '32.00 x 30.00 inch' },
+                      { label: 'Type', value: 'Painting' },
+                      { label: 'Style', value: 'Geometric' },
+                      { label: 'Year', value: '2018' }
+                    ].map((item) => (
+                      <motion.div
+                        key={item.label}
+                        whileHover={{ y: -4, scale: 1.01 }}
+                        transition={{ type: 'spring', stiffness: 260, damping: 18 }}
+                        className="rounded-2xl border border-[#eadcc1] bg-white/80 p-4 shadow-sm"
+                      >
+                        <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#a47d44]">{item.label}</div>
+                        <div className="mt-1 text-base font-semibold text-slate-900">{item.value}</div>
+                      </motion.div>
+                    ))}
+                  </div>
 
-                  <ArtworkStatement title="Lady and Butterflies" defaultOpen={true}>
-                    <div className="space-y-3">
-                      <p>To further enhance the connection with nature, I have included three butterflies in the painting. Resplendent in darker shades of purple and pink, they flutter gracefully around the woman's face. These ethereal creatures symbolize the delicate balance of life and the interconnectedness between all living beings.</p>
-
-                      <p>"Lady and Butterflies" belongs to the series "In Harmony with Nature." This collection explores the profound connection and interdependence between humans and the natural world. Through my art, I strive to inspire viewers to embrace compassion, appreciate the beauty of nature, and live in harmony with our surroundings.</p>
-
-                      <h5 className="font-extrabold text-xl">Capturing the Awe-Inspiring Connection</h5>
-                      <p>With "Lady and Butterflies", I aimed to capture the profound and awe-inspiring connection between humans and nature. The woman's gentle smile and loving gaze reflect her appreciation for the beauty that surrounds her. It is a reminder that we, too, can experience this sense of wonder and unity by embracing our role as caretakers of the earth.</p>
-
-                      <h5 className="font-extrabold text-xl">Living in Harmony with Nature</h5>
-                      <p>Through this artwork, I hope to convey the importance of living in harmony with nature. Our actions, both individually and collectively, reverberate through the delicate balance of ecosystems. By fostering empathy for all creatures, we can mitigate the negative impacts of human activities and strive towards a more sustainable coexistence.</p>
-
-                      <p>In this series, I use symmetrical forms—squares, rectangles, checks, and butterflies—to cover the human figures. These geometric shapes represent the pursuit of perfection and balance, encapsulating the aspirations and struggles we all face as individuals striving for fulfillment.</p>
+                  <div className="mt-5 grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-4">
+                    <div className="rounded-2xl border border-[#eadcc1] bg-white/90 p-4 sm:p-5">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-slate-700">
+                        {[
+                          ['Category', 'Portrait'],
+                          ['Techniques', 'Acrylic'],
+                          ['Material used', 'Canvas'],
+                          ['Size (WxH)', '45.72 x 50.80 cm'],
+                          ['Medium', 'Acrylic'],
+                          ['Selling Options', 'Original'],
+                          ['Delivery', 'Stretched'],
+                          ['Shipped as', 'Rolled']
+                        ].map(([label, value]) => (
+                          <div key={label} className="rounded-xl bg-slate-50/80 px-3 py-2">
+                            <span className="font-semibold text-slate-900">{label}:</span> {value}
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </ArtworkStatement>
+
+                    <div className="rounded-2xl border border-[#eadcc1] bg-gradient-to-br from-[#fffdf8] to-[#f7efd8] p-4 sm:p-5">
+                      <div className="text-sm font-semibold uppercase tracking-[0.18em] text-[#a47d44]">Quick facts</div>
+                      <div className="mt-3 space-y-3">
+                        {[
+                          'Three butterflies frame the woman’s face to create movement and delicacy.',
+                          'Symmetry and geometric forms represent balance, perfection, and emotional tension.',
+                          'The visual language connects human expression with the natural world.'
+                        ].map((fact, index) => (
+                          <motion.div
+                            key={fact}
+                            initial={{ opacity: 0, x: -14 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: index * 0.08 }}
+                            className="flex gap-3 rounded-xl bg-white/80 px-3 py-3 text-sm text-slate-700 shadow-sm"
+                          >
+                            <span className="mt-1 h-2.5 w-2.5 rounded-full bg-[#c9a96e] flex-shrink-0" />
+                            <span>{fact}</span>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-5">
+                    <ArtworkStatement title="Lady and Butterflies" defaultOpen={true}>
+                      <div className="space-y-4">
+                        <p>To further enhance the connection with nature, I have included three butterflies in the painting. Resplendent in darker shades of purple and pink, they flutter gracefully around the woman's face. These ethereal creatures symbolize the delicate balance of life and the interconnectedness between all living beings.</p>
+
+                        <p>"Lady and Butterflies" belongs to the series "In Harmony with Nature." This collection explores the profound connection and interdependence between humans and the natural world. Through my art, I strive to inspire viewers to embrace compassion, appreciate the beauty of nature, and live in harmony with our surroundings.</p>
+
+                        <h5 className="font-extrabold text-xl text-slate-900">Capturing the Awe-Inspiring Connection</h5>
+                        <p>With "Lady and Butterflies", I aimed to capture the profound and awe-inspiring connection between humans and nature. The woman's gentle smile and loving gaze reflect her appreciation for the beauty that surrounds her. It is a reminder that we, too, can experience this sense of wonder and unity by embracing our role as caretakers of the earth.</p>
+
+                        <h5 className="font-extrabold text-xl text-slate-900">Living in Harmony with Nature</h5>
+                        <p>Through this artwork, I hope to convey the importance of living in harmony with nature. Our actions, both individually and collectively, reverberate through the delicate balance of ecosystems. By fostering empathy for all creatures, we can mitigate the negative impacts of human activities and strive towards a more sustainable coexistence.</p>
+
+                        <p>In this series, I use symmetrical forms—squares, rectangles, checks, and butterflies—to cover the human figures. These geometric shapes represent the pursuit of perfection and balance, encapsulating the aspirations and struggles we all face as individuals striving for fulfillment.</p>
+                      </div>
+                    </ArtworkStatement>
+                  </div>
                 </div>
               </motion.div>
             )}
@@ -585,49 +684,146 @@ export default function ProductDetail() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="space-y-4 text-justify"
+                className="space-y-6"
               >
-                <p className="mb-3"><strong>About The Artist</strong></p>
-                <p className="mb-3">PRADIP SARKAR was born in Dhanbad, Jharkhand. He is a commerce graduate from Ranchi University and holds a diploma in fine art from the British Institute, Mumbai. Pradip is a gifted artist and a well-known face in the Indian contemporary art world since 1995, with over 70 significant exhibitions.</p>
-                
-                {/* Artist Images 1 & 2 */}
-                <div className="grid grid-cols-2 gap-3 my-4">
-                  <div className="rounded-lg overflow-hidden shadow-md">
-                    <img src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=800&q=80" alt="Artist at work" className="w-full h-48 sm:h-56 md:h-64 object-cover" loading="lazy" />
+                <div className="rounded-3xl border border-[#eadcc1] bg-gradient-to-br from-white via-[#fffdf8] to-[#f8f3e8] p-4 sm:p-6 shadow-[0_20px_60px_rgba(201,169,110,0.12)]">
+                  <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                    <div className="max-w-3xl space-y-4">
+                      <div className="inline-flex items-center rounded-full border border-[#ead4a7] bg-[#c9a96e]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-[#8f6a39]">
+                        Artist profile
+                      </div>
+                      <div className="text-2xl font-semibold text-slate-900">About The Artist</div>
+                      <p className="text-sm sm:text-base leading-7 text-slate-700">
+                        PRADIP SARKAR was born in Dhanbad, Jharkhand. He is a commerce graduate from Ranchi University and holds a diploma in fine art from the British Institute, Mumbai. Pradip is a gifted artist and a well-known face in the Indian contemporary art world since 1995, with over 70 significant exhibitions.
+                      </p>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2 lg:justify-end">
+                      <button
+                        onClick={handleCopyArtworkSummary}
+                        className="inline-flex items-center gap-2 rounded-full bg-[#c9a96e] px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#b48a50]"
+                      >
+                        <Share2 size={16} />
+                        Copy artwork summary
+                      </button>
+                      <button
+                        onClick={() => setTab('shipping')}
+                        className="inline-flex items-center gap-2 rounded-full border border-[#d9c8aa] bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-[#c9a96e] hover:text-[#8f6a39]"
+                      >
+                        <Truck size={16} />
+                        Shipping policy
+                      </button>
+                    </div>
                   </div>
-                  <div className="rounded-lg overflow-hidden shadow-md">
-                    <img src="https://images.unsplash.com/photo-1578301978162-7aae4d755744?w=800&q=80" alt="Geometric artwork" className="w-full h-48 sm:h-56 md:h-64 object-cover" loading="lazy" />
+
+                  <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
+                    {[
+                      { label: 'Since', value: '1995' },
+                      { label: 'Exhibitions', value: '70+' },
+                      { label: 'Focus', value: 'Geometric abstraction' },
+                      { label: 'Collections', value: 'India + abroad' }
+                    ].map((item) => (
+                      <motion.div
+                        key={item.label}
+                        whileHover={{ y: -4, scale: 1.01 }}
+                        transition={{ type: 'spring', stiffness: 260, damping: 18 }}
+                        className="rounded-2xl border border-[#eadcc1] bg-white/80 p-4 shadow-sm"
+                      >
+                        <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#a47d44]">{item.label}</div>
+                        <div className="mt-1 text-base font-semibold text-slate-900">{item.value}</div>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  <div className="mt-5 grid grid-cols-1 lg:grid-cols-[1fr_0.9fr] gap-4">
+                    <div className="rounded-2xl border border-[#eadcc1] bg-white/90 p-4 sm:p-5 text-justify text-slate-700">
+                      <p className="mb-3">PRADIP SARKAR is an eminent artist of international repute whose geometric abstraction masterpieces adorn many corporate collections in India and abroad. His works are present in prestigious galleries like Lalit Kala Akademi.</p>
+                      <p className="mb-3">Pradip's palette is warm, inviting and vibrant. His brush strokes speak of serenity, soothing hues and characteristic vibrancy. His work focuses on spiritual and cultural aspects of society and reflects his philosophy of life, leaning towards music and harmony.</p>
+                      <p className="mb-0">Pradip says, "Art is the expression of his own life story... art is divine" — his love for music and harmony shows itself through his works. His paintings are found in collections across Germany, USA, Dubai and India, and in numerous corporate and institutional collections including Lalit Kala Akademi.</p>
+
+                      <div className="mt-5 rounded-2xl border border-[#eadcc1] bg-gradient-to-br from-[#fffdf8] to-[#f7efd8] p-4 shadow-sm">
+                        <div className="text-sm font-semibold uppercase tracking-[0.18em] text-[#a47d44]">Artist highlights</div>
+                        <div className="mt-3 grid gap-3 sm:grid-cols-3">
+                          {[
+                            { icon: Globe, title: 'Global reach', text: 'Collected across Germany, USA, Dubai, and India.' },
+                            { icon: Shield, title: 'Institutional presence', text: 'Works included in respected galleries and corporate collections.' },
+                            { icon: Star, title: 'Creative focus', text: 'Music, harmony, and geometric balance drive the visual language.' }
+                          ].map((item, index) => (
+                            <motion.div
+                              key={item.title}
+                              initial={{ opacity: 0, y: 14 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ delay: index * 0.08 }}
+                              className="rounded-xl bg-white/80 p-3 shadow-sm"
+                            >
+                              <div className="flex items-center gap-2 text-slate-900">
+                                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#c9a96e]/12 text-[#8f6a39]">
+                                  <item.icon size={16} />
+                                </span>
+                                <span className="font-semibold text-sm">{item.title}</span>
+                              </div>
+                              <p className="mt-2 text-xs leading-6 text-slate-600">{item.text}</p>
+                            </motion.div>
+                          ))}
+                        </div>
+
+                        <div className="mt-3 rounded-xl border border-dashed border-[#e4cfaa] bg-white/70 p-3 text-sm text-slate-700">
+                          <span className="font-semibold text-slate-900">Studio note:</span> every canvas is built with layered acrylic to keep the surface alive with depth and movement.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      {[
+                        { src: 'https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=800&q=80', alt: 'Artist at work' },
+                        { src: 'https://images.unsplash.com/photo-1578301978162-7aae4d755744?w=800&q=80', alt: 'Geometric artwork' },
+                        { src: 'https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?w=400', alt: 'Artist studio' },
+                        { src: akhImage, alt: 'Gallery exhibition' }
+                      ].map((item, index) => (
+                        <motion.div
+                          key={item.alt}
+                          initial={{ opacity: 0, y: 18 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.4, delay: index * 0.07 }}
+                          whileHover={{ y: -6, scale: 1.02 }}
+                          className={`overflow-hidden rounded-2xl border border-[#eadcc1] shadow-md ${index === 3 ? 'bg-slate-50 col-span-2' : 'bg-white'}`}
+                        >
+                          <img
+                            src={item.src}
+                            alt={item.alt}
+                            className={`w-full ${index === 3 ? 'h-52 sm:h-60 object-contain' : 'h-40 sm:h-48 object-cover'}`}
+                            loading="lazy"
+                          />
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mt-5 rounded-2xl border border-[#eadcc1] bg-gradient-to-br from-[#fffdf8] to-[#f7efd8] p-4 sm:p-5">
+                    <div className="text-sm font-semibold uppercase tracking-[0.18em] text-[#a47d44]">Artistic vision</div>
+                    <div className="mt-3 grid grid-cols-1 md:grid-cols-3 gap-3 text-sm text-slate-700">
+                      {[
+                        'His Divine Tunes series merges music, spirituality, and visual art.',
+                        'He draws inspiration from classical Indian music, folk traditions, and cultural texture.',
+                        'Acrylic layering gives each artwork depth, luminosity, and tactile richness.'
+                      ].map((fact, index) => (
+                        <motion.div
+                          key={fact}
+                          initial={{ opacity: 0, x: -14 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: index * 0.08 }}
+                          className="flex gap-3 rounded-xl bg-white/80 px-3 py-3 shadow-sm"
+                        >
+                          <span className="mt-1 h-2.5 w-2.5 rounded-full bg-[#c9a96e] flex-shrink-0" />
+                          <span>{fact}</span>
+                        </motion.div>
+                      ))}
+                    </div>
                   </div>
                 </div>
-
-                <p className="mb-3">PRADIP SARKAR is an eminent artist of international repute whose geometric abstraction masterpieces adorn many corporate collections in India and abroad. His works are present in prestigious galleries like Lalit Kala Akademi.</p>
-                <p className="mb-3">Pradip's palette is warm, inviting and vibrant. His brush strokes speak of serenity, soothing hues and characteristic vibrancy. His work focuses on spiritual and cultural aspects of society and reflects his philosophy of life, leaning towards music and harmony.</p>
-                
-                {/* Artist Images 3 & 4 */}
-                <div className="grid grid-cols-2 gap-3 my-4">
-                  <div className="rounded-lg overflow-hidden shadow-md">
-                    <img src="https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?w=400" alt="Artist studio" className="w-full h-48 sm:h-56 md:h-64 object-cover" />
-                  </div>
-                  <div className="rounded-lg overflow-hidden shadow-md">
-                    <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=400" alt="Abstract painting" className="w-full h-48 sm:h-56 md:h-64 object-cover" />
-                  </div>
-                </div>
-
-                <p className="mb-3 mt-4"><strong>Artistic Vision</strong></p>
-                <p className="mb-3">His 'Divine Tunes' series represents the pinnacle of his artistic vision, where music, spirituality, and visual art converge. Pradip draws inspiration from classical Indian music, folk traditions, and the vibrant cultural tapestry of India.</p>
-                <p className="mb-3">Working primarily with acrylics on canvas, Pradip employs a sophisticated layering technique that gives his paintings remarkable depth and luminosity. Each artwork is meticulously crafted, with layers of acrylic carefully applied to create depth and texture.</p>
-                
-                {/* Artist Images 5 & 6 */}
-                <div className="grid grid-cols-2 gap-3 my-4">
-                  <div className="rounded-lg overflow-hidden shadow-md bg-slate-50">
-                    <img src={akhImage} alt="Gallery exhibition" className="w-full h-56 sm:h-64 md:h-72 object-contain" />
-                  </div>
-                  <div className="rounded-lg overflow-hidden shadow-md">
-                    <img src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=400" alt="Art collection" className="w-full h-56 sm:h-64 md:h-72 object-cover" />
-                  </div>
-                </div>
-
-                <p className="mb-3">Pradip says, "Art is the expression of his own life story... art is divine" — his love for music and harmony shows itself through his works. His paintings are found in collections across Germany, USA, Dubai and India, and in numerous corporate and institutional collections including Lalit Kala Akademi.</p>
               </motion.div>
             )}
 
@@ -639,96 +835,122 @@ export default function ProductDetail() {
                 transition={{ duration: 0.5 }}
                 className="space-y-6"
               >
-                {/* Shipping & Returns Policy Header */}
-                <div className="border-l-4 border-[#c9a96e] pl-4">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-1">Shipping & Returns Policy</h3>
-                  <p className="text-sm text-slate-600">Worldwide delivery with care</p>
-                </div>
-
-                {/* Delivery Timeline Section */}
-                <div className="bg-slate-50 rounded-lg p-6 border border-slate-200">
-                  <h4 className="font-bold text-slate-900 text-lg mb-4">Delivery Timeline</h4>
-                  
-                  <div className="space-y-3">
-                    <div className="bg-white p-4 rounded-md border border-slate-200">
-                      <div className="font-semibold text-slate-900 mb-1">Domestic Shipping</div>
-                      <p className="text-sm text-slate-600">5-7 business days</p>
+                <div className="rounded-3xl border border-[#eadcc1] bg-gradient-to-br from-white via-[#fffdf8] to-[#f8f3e8] p-4 sm:p-6 shadow-[0_20px_60px_rgba(201,169,110,0.12)]">
+                  <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                    <div className="max-w-3xl space-y-4">
+                      <div className="inline-flex items-center rounded-full border border-[#ead4a7] bg-[#c9a96e]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-[#8f6a39]">
+                        Shipping policy
+                      </div>
+                      <div className="text-2xl font-semibold text-slate-900">Shipping & Returns Policy</div>
+                      <p className="text-sm sm:text-base leading-7 text-slate-700">Worldwide delivery with care. Artwork is packed securely, handled carefully, and shipped with clear return boundaries so collectors know exactly what to expect.</p>
                     </div>
-                    
-                    <div className="bg-white p-4 rounded-md border border-slate-200">
-                      <div className="font-semibold text-slate-900 mb-1">International Shipping</div>
-                      <p className="text-sm text-slate-600">10-20 business days (varies by country)</p>
+
+                    <div className="flex flex-wrap gap-2 lg:justify-end">
+                      <button
+                        onClick={() => setTab('artwork')}
+                        className="inline-flex items-center gap-2 rounded-full bg-[#c9a96e] px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#b48a50]"
+                      >
+                        <Truck size={16} />
+                        Back to artwork
+                      </button>
+                      <button
+                        onClick={() => setTab('artist')}
+                        className="inline-flex items-center gap-2 rounded-full border border-[#d9c8aa] bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-[#c9a96e] hover:text-[#8f6a39]"
+                      >
+                        <MessageCircle size={16} />
+                        Artist bio
+                      </button>
                     </div>
                   </div>
-                </div>
 
-                {/* Shipping Cost Section */}
-                <div className="bg-slate-50 rounded-lg p-6 border border-slate-200">
-                  <h4 className="font-bold text-slate-900 text-lg mb-4">Shipping Cost</h4>
-                  
-                  <div className="space-y-3">
-                    <div className="bg-white p-4 rounded-md border border-green-200">
-                      <p className="text-sm text-slate-700">
-                        <strong className="text-slate-900">Free shipping</strong> included in artwork price
-                      </p>
-                    </div>
-                    
-                    <div className="bg-white p-4 rounded-md border border-slate-200">
-                      <p className="text-sm text-slate-700">
-                        Custom duties, octroi & taxes are <strong>customer's responsibility</strong>
-                      </p>
+                  <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
+                    {[
+                      { label: 'Domestic', value: '5-7 business days' },
+                      { label: 'International', value: '10-20 business days' },
+                      { label: 'Returns', value: '24-hour damage window' },
+                      { label: 'Packaging', value: 'Premium insured wrap' }
+                    ].map((item) => (
+                      <motion.div
+                        key={item.label}
+                        whileHover={{ y: -4, scale: 1.01 }}
+                        transition={{ type: 'spring', stiffness: 260, damping: 18 }}
+                        className="rounded-2xl border border-[#eadcc1] bg-white/80 p-4 shadow-sm"
+                      >
+                        <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#a47d44]">{item.label}</div>
+                        <div className="mt-1 text-base font-semibold text-slate-900">{item.value}</div>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  <div className="mt-5 grid grid-cols-1 lg:grid-cols-3 gap-4">
+                    {[
+                      {
+                        icon: Clock,
+                        title: 'Delivery Timeline',
+                        content: ['Domestic shipping: 5-7 business days', 'International shipping: 10-20 business days (varies by country)']
+                      },
+                      {
+                        icon: Truck,
+                        title: 'Shipping Cost',
+                        content: ['Free shipping is included in the artwork price', "Custom duties, octroi & taxes are customer's responsibility"]
+                      },
+                      {
+                        icon: RefreshCw,
+                        title: 'Returns Policy',
+                        content: ['24-hour window from delivery receipt', 'Returns accepted only if artwork is damaged', 'Commissioned/custom orders are non-returnable']
+                      }
+                    ].map((section, index) => (
+                      <motion.div
+                        key={section.title}
+                        initial={{ opacity: 0, y: 18 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.08 }}
+                        className="rounded-2xl border border-[#eadcc1] bg-white/90 p-4 sm:p-5 shadow-sm"
+                      >
+                        <div className="flex items-center gap-3">
+                          <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#c9a96e]/12 text-[#8f6a39]">
+                            <section.icon size={18} />
+                          </span>
+                          <div className="text-lg font-semibold text-slate-900">{section.title}</div>
+                        </div>
+
+                        <div className="mt-4 space-y-3 text-sm text-slate-700">
+                          {section.content.map((line, lineIndex) => (
+                            <div key={line} className={`rounded-xl px-3 py-3 ${lineIndex === 0 ? 'bg-slate-50/80' : 'bg-[#fdf7ea]'}`}>
+                              {line}
+                            </div>
+                          ))}
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  <div className="mt-5 rounded-2xl border border-[#eadcc1] bg-gradient-to-br from-[#fffdf8] to-[#f7efd8] p-4 sm:p-5">
+                    <div className="text-sm font-semibold uppercase tracking-[0.18em] text-[#a47d44]">Premium packaging</div>
+                    <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-slate-700">
+                      {[
+                        'Reinforced tube packaging',
+                        'Professional framing available',
+                        'Insured delivery option',
+                        'Secure bubble wrap'
+                      ].map((item, index) => (
+                        <motion.div
+                          key={item}
+                          initial={{ opacity: 0, x: -14 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: index * 0.05 }}
+                          className="flex gap-3 rounded-xl bg-white/80 px-3 py-3 shadow-sm"
+                        >
+                          <span className="mt-1 h-2.5 w-2.5 rounded-full bg-[#c9a96e] flex-shrink-0" />
+                          <span>{item}</span>
+                        </motion.div>
+                      ))}
                     </div>
                   </div>
-                </div>
 
-                {/* Returns Policy Section */}
-                <div className="bg-slate-50 rounded-lg p-6 border border-slate-200">
-                  <h4 className="font-bold text-slate-900 text-lg mb-4">Returns Policy</h4>
-                  
-                  <div className="space-y-3">
-                    <div className="bg-white p-4 rounded-md border border-slate-200">
-                      <p className="text-sm text-slate-700 mb-2">
-                        <strong className="text-slate-900">24-hour window</strong> from delivery receipt
-                      </p>
-                      <p className="text-sm text-slate-700">
-                        Returns accepted <strong>only if artwork is damaged</strong>
-                      </p>
-                    </div>
-                    
-                    <div className="bg-amber-50 p-4 rounded-md border border-amber-200">
-                      <p className="text-sm text-slate-700">
-                        <strong className="text-slate-900">Note:</strong> Commissioned/custom orders are <strong className="text-amber-700">non-returnable</strong>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Premium Packaging Section */}
-                <div className="bg-slate-50 rounded-lg p-6 border border-slate-200">
-                  <h4 className="font-bold text-slate-900 text-lg mb-4">Premium Packaging</h4>
-                  
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="bg-white p-3 rounded-md border border-slate-200 text-sm text-slate-700">
-                      Reinforced tube packaging
-                    </div>
-                    
-                    <div className="bg-white p-3 rounded-md border border-slate-200 text-sm text-slate-700">
-                      Professional framing available
-                    </div>
-                    
-                    <div className="bg-white p-3 rounded-md border border-slate-200 text-sm text-slate-700">
-                      Insured delivery option
-                    </div>
-                    
-                    <div className="bg-white p-3 rounded-md border border-slate-200 text-sm text-slate-700">
-                      Secure bubble wrap
-                    </div>
-                  </div>
-                </div>
-
-                {/* SKU Info */}
-                <div className="pt-4 border-t border-slate-200">
-                  <div className="flex items-center justify-between text-sm text-slate-600">
+                  <div className="mt-5 flex flex-col gap-3 border-t border-[#eadcc1] pt-4 sm:flex-row sm:items-center sm:justify-between text-sm text-slate-600">
                     <div className="flex items-center gap-2">
                       <span className="font-medium text-slate-900">SKU:</span>
                       <span className="px-3 py-1 bg-slate-100 rounded-md font-mono text-xs">ART-1005</span>
@@ -754,23 +976,39 @@ export default function ProductDetail() {
         >
           <div className="w-full max-w-5xl mx-auto px-4 md:px-8">
             <motion.h3 
-              className="text-4xl md:text-5xl font-serif font-extrabold text-slate-900 mb-8 flex items-center justify-center gap-4 group"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              className="mb-8 flex flex-col items-center justify-center gap-4 text-center"
+              initial={{ opacity: 0, y: 20 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: 'easeOut' }}
             >
-              <motion.span 
-                className="h-1 bg-gradient-to-r from-slate-900 via-emerald-600 to-teal-600 group-hover:from-emerald-600 group-hover:to-teal-600 transition-all duration-500 rounded-full shadow-lg"
-                initial={{ width: 0 }}
-                whileInView={{ width: 60 }}
+              <motion.div
+                className="inline-flex items-center gap-4 rounded-full border border-amber-200/80 bg-white/80 px-5 py-2 shadow-[0_10px_30px_rgba(15,23,42,0.06)] backdrop-blur-sm"
+                initial={{ scale: 0.96, opacity: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 1, delay: 0.4 }}
-                whileHover={{ width: 80, height: 6 }}
-              ></motion.span>
-              <motion.span 
-                className="group-hover:text-emerald-600 transition-colors duration-300"
-                whileHover={{ scale: 1.05, x: 10 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.55, delay: 0.1 }}
+              >
+                <motion.span
+                  className="h-[2px] w-10 rounded-full bg-gradient-to-r from-transparent via-amber-500 to-emerald-700"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: 44 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                />
+                <span className="text-[11px] font-semibold uppercase tracking-[0.34em] text-slate-500">Profile Highlight</span>
+                <motion.span
+                  className="h-[2px] w-10 rounded-full bg-gradient-to-r from-emerald-700 via-amber-500 to-transparent"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: 44 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                />
+              </motion.div>
+              <motion.span
+                className="font-serif text-4xl md:text-5xl font-semibold tracking-tight text-slate-900"
+                whileHover={{ letterSpacing: '0.04em', scale: 1.01 }}
+                transition={{ duration: 0.35 }}
               >
                 The Artist
               </motion.span>
